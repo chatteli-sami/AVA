@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Plan Interactif AVA</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+    }
+
+    .plan-container {
+      position: relative;
+      max-width: 1350px;
+      object-fit:cover;
+      margin: auto;
+    }
+
+    .plan-container img {
+      width: 100%;
+      display: block;
+    }
+
+    /* Punaise stylisée */
+    .pin {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #aaa;
+      border-radius: 50%;
+      cursor: pointer;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      transition: background 0.3s;
+    }
+    .pin-halo {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(192,192,192,0.4); /* silver léger */
+  filter: blur(8px);
+  pointer-events: none;
+  z-index: 5; /* derrière le pin */
+  transform: translate(-50%, -50%) scale(0.8);
+}
+
+    .pin:hover {
+      background: #444;
+    }
+
+    /* Cercle élégant */
+    .circle {
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: spin 25s linear infinite;
+      pointer-events: none;
+      z-index: 20;
+      border: 1px solid rgba(166, 135, 62, 0.6); /* doré transparent */
+      backdrop-filter: blur(6px); /* effet flou luxe */
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .circle img {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      object-fit: cover;
+      pointer-events: auto;
+      cursor: pointer;
+      transition: transform 0.4s ease, box-shadow 0.3s ease;
+      border: 2px solid rgba(255,255,255,0.5);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .circle img:hover {
+      transform: scale(1.25);
+      z-index: 25;
+      box-shadow: 0 6px 16px rgba(166,135,62,0.5); /* glow doré */
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Overlay plein écran */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.92);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .overlay img {
+      max-width: 80%;
+      max-height: 80%;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      font-size: 30px;
+      color: white;
+      cursor: pointer;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 40px;
+      color: white;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .prev { left: 40px; }
+    .next { right: 40px; }
+    .back-btn {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: #b0b0b0; /* gris clair */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      z-index: 1000;
+    }
+
+    /* Icône flèche */
+    .back-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: white;
+    }
+
+    /* Effet hover */
+    .back-btn:hover {
+      background: #555;   /* devient gris foncé */
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+
+<div class="plan-container">
+  <img src="Dup06.jpg" alt="Plan AVA">
+
+
+  <div class="pin" style="top:40%; left:43%;" data-room="salon"></div>
+  <div class="pin" style="top:77%; left:43%;" data-room="suite_maitre"></div>
+   <div class="pin" style="top:38%; left:32%;" data-room="cuisine"></div>
+  <div class="pin" style="top:45%; left:77%;" data-room="suite_invite"></div>
+  <div class="pin" style="top:30%; left:88%;" data-room="toilette_invite"></div>
+  <div class="pin" style="top:30%; left:55%;" data-room="terrasse"></div>
+  <div class="pin" style="top:45%; left:55%;" data-room="chambre1"></div>
+
+
+</div>
+<!-- Overlay Carrousel -->
+<div class="overlay" id="overlay">
+  <span class="close-btn" onclick="closeOverlay()">&times;</span>
+  <span class="carousel-btn prev" onclick="changeImage(-1)">&#10094;</span>
+  <img id="carousel-image" src="">
+  <span class="carousel-btn next" onclick="changeImage(1)">&#10095;</span>
+</div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+const rooms = {
+  salon: ["../assets/images/DUPLEX2.jpg","../assets/images/DUPLEX4.jpg","../assets/images/DUPLEX8.jpg","../assets/images/DUPLEX5.jpg","../assets/images/DUPLEX6.jpg","../assets/images/DUPLEX7.jpg","../assets/images/DUPLEX9.jpg"],
+  cuisine: ["../assets/images/DUPLEX12.jpg", "../assets/images/DUPLEX3.jpg","../assets/images/DUPLEX11.jpg"],
+  suite_invite: ["../assets/images/DUPLEX13.jpg","../assets/images/DUPLEX17.jpg","../assets/images/DUPLEX19.jpg"],
+  suite_maitre: ["../assets/images/DUPLEX1.jpg"],
+  terrasse: ["../assets/images/DUPLEX10.jpg"],
+  chambre1: ["../assets/images/SuitePanoramique.jpg"],
+  toilette_invite: ["../assets/images/DUPLEX14.jpg","../assets/images/DUPLEX15.jpg"],
+  
+
+};
+  let currentImages = [];
+let currentIndex = 0;
+
+const overlay = document.getElementById("overlay");
+const carouselImage = document.getElementById("carousel-image");
+const counter = document.createElement("div");
+counter.style.color = "white";
+counter.style.marginTop = "15px";
+counter.style.fontSize = "18px";
+overlay.appendChild(counter);
+
+function updateCarousel() {
+  carouselImage.src = currentImages[currentIndex] || "";
+  counter.textContent = (currentImages.length > 0)
+    ? `${currentIndex + 1} / ${currentImages.length}`
+    : "Aucune photo";
+
+  document.querySelector(".prev").style.display = (currentImages.length > 1) ? "block" : "none";
+  document.querySelector(".next").style.display = (currentImages.length > 1) ? "block" : "none";
+}
+
+function showDynamicImages(pin, room) {
+  const images = rooms[room] && rooms[room].length > 0 ? rooms[room] : ["../assets/images/noimage.jpg"];
+
+  // Nettoyage
+  const oldContainer = document.querySelector(".dynamic-container");
+  if (oldContainer) oldContainer.remove();
+
+  // Conteneur
+  const container = document.createElement("div");
+  container.classList.add("dynamic-container");
+  container.style.position = "absolute";
+  container.style.width = "0px";
+  container.style.height = "0px";
+  container.style.zIndex = 20;
+
+  // Ajouter au même parent que le pin
+  pin.parentElement.appendChild(container);
+
+  // Centrer le container sur le pin
+  const parentRect = pin.parentElement.getBoundingClientRect();
+  const pinRect = pin.getBoundingClientRect();
+  
+  // Calcul de la position relative au parent
+  const left = pinRect.left - parentRect.left + pinRect.width / 2;
+  const top = pinRect.top - parentRect.top + pinRect.height / 2;
+
+  container.style.left = left + "px";
+  container.style.top = top + "px";
+
+  const radius = 100; // rayon du cercle
+
+  // Calcul des angles
+  const n = images.length;
+  let angles = [];
+  if (n === 1) angles = [-90];
+  else if (n === 2) angles = [-60, -120];
+  else if (n === 3) angles = [-90, -30, -150];
+  else {
+    const step = 360 / n;
+    for (let i = 0; i < n; i++) angles.push(-90 + i * step);
+  }
+
+  images.forEach((src, i) => {
+    const img = document.createElement("img");
+    img.src = src;
+    img.style.width = "60px";
+    img.style.height = "60px";
+    img.style.borderRadius = "12px";
+    img.style.objectFit = "cover";
+    img.style.position = "absolute";
+    img.style.left = "0px";
+    img.style.top = "0px";
+    img.style.opacity = 0;
+    img.style.cursor = "pointer";
+    container.appendChild(img);
+
+    const angle = angles[i];
+    const x = radius * Math.cos(angle * Math.PI / 180);
+    const y = radius * Math.sin(angle * Math.PI / 180);
+
+    gsap.to(img, {
+      duration: 0.6,
+      x, y,
+      opacity: 1,
+      scale: 1,
+      delay: i * 0.08,
+      ease: "back.out(1.7)"
+    });
+
+    img.addEventListener("click", () => {
+      currentImages = images;
+      currentIndex = i;
+      updateCarousel();
+      overlay.style.display = "flex";
+    });
+  });
+}
+
+
+// ✅ Un seul listener par pin
+document.querySelectorAll(".pin").forEach(pin => {
+  // créer le halo derrière le pin
+  const halo = document.createElement("div");
+  halo.classList.add("pin-halo");
+  pin.parentElement.appendChild(halo);
+  halo.style.top = pin.offsetTop + "px";
+  halo.style.left = pin.offsetLeft + "px";
+
+  pin.addEventListener("click", () => {
+    const room = pin.getAttribute("data-room");
+    showDynamicImages(pin, room);
+
+    // Animation du halo
+    gsap.fromTo(halo,
+      { scale: 0.8, opacity: 0.3 },
+      { scale: 1.3, opacity: 0.6, duration: 0.6, yoyo: true, repeat: 3, ease: "power1.inOut" }
+    );
+
+    // Petite pulsation du pin pour plus de dynamisme
+    gsap.fromTo(pin,
+      { scale: 1 },
+      { scale: 1.4, duration: 0.5, yoyo: true, repeat: -1, ease: "power1.inOut" }
+    );
+ });
+});
+function closeOverlay() { overlay.style.display = "none"; }
+
+function changeImage(direction) {
+  if (currentImages.length > 1) {
+    currentIndex += direction;
+    if (currentIndex < 0) currentIndex = currentImages.length - 1;
+    if (currentIndex >= currentImages.length) currentIndex = 0;
+    updateCarousel();
+  }
+}
+</script>
+
+<!-- Bouton retour -->
+<div class="back-btn" onclick="history.back()">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M15 18l-6-6 6-6"/>
+  </svg>
+</div>
+</body>
+</html>

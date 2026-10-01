@@ -1,0 +1,92 @@
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  overflow: hidden;
+  background: var(--beige-light, #F0F1FA);
+  color: #9a6f45;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.done {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 1000ms ease, visibility 0s linear 1000ms;
+}
+
+.ava {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  padding-left: 0.35em;
+  background: linear-gradient(100deg, #795126 0%, #a87842 26%, #d1ad7d 45%, #a8753e 66%, #684324 100%);
+  background-clip: text;
+  color: #a87842;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(48px, 10vw, 112px);
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  opacity: 0.95;
+  pointer-events: none;
+  filter: drop-shadow(0 3px 12px rgba(106, 73, 38, 0.12));
+  -webkit-text-stroke: 0.5px rgba(104, 67, 36, 0.2);
+  -webkit-text-fill-color: transparent;
+}
+
+.trail {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.trail path {
+  fill: none;
+  stroke: #c9a077;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  opacity: 0.7;
+}
+
+.bird {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: auto !important;
+  max-width: none;
+  height: clamp(60px, 9vh, 100px);
+  aspect-ratio: 686 / 1000;
+  object-fit: contain;
+  transform-origin: center;
+  will-change: transform;
+  filter: drop-shadow(0 6px 10px rgba(154, 111, 69, 0.3));
+}
+
+.count {
+  position: absolute;
+  right: 0;
+  bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+  left: 0;
+  color: #9a6f45;
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.3em;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .done {
+    transition: none;
+  }
+}

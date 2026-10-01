@@ -1,0 +1,16 @@
+.page {
+  --duration: 360ms;
+  --easing: cubic-bezier(0.22, 1, 0.36, 1);
+  width: 100%;
+  min-height: 1px;
+}
+
+.page:focus {
+  outline: none;
+}
+
+.page:focus-visible {
+  outline: 2px solid #b2804b;
+  outline-offset: 4px;
+  transition: outline-offset var(--duration) var(--easing);
+}

@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AVA Motion System
 
-## Getting Started
+Reusable motion utilities for this Next.js App Router project. The shared root layout includes the Oiseau flight intro, keyed route transitions, and the global header. The homepage uses `Section` for scroll reveals. Visit `/motion-demo` to try staggered content, same-page scrolling, and cross-page anchors.
 
-First, run the development server:
+## Install
+
+Framer Motion is the only added dependency and is already listed in this project's `package.json`:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install framer-motion
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```json
+{
+  "dependencies": {
+    "framer-motion": "^13.5.0"
+  }
+}
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Components
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `components/IntroFlight.tsx` animates `/images/Oiseau.png` along a responsive path with an SVG trail. It plays once automatically; reduced-motion preferences bypass the flight.
+- `components/AnimatedLayout.tsx` keys route content by `usePathname()` and uses `AnimatePresence` in `mode="wait"`. Set `duration` in seconds and `easing` to a Framer Motion easing name or cubic-bezier tuple.
+- `components/AnimatedPage.tsx` animates route enter/exit using only opacity and vertical transform. It focuses the incoming page or a pending anchor after the transition.
+- `components/Section.tsx` reveals content with fade and slide. It accepts `threshold`, `rootMargin`, `once`, `staggerChildren`, `duration`, and `easing`.
+- `hooks/useInViewReveal.ts` shares `IntersectionObserver` instances for equal threshold/root-margin configurations.
+- `components/ScrollLink.tsx` supports `#section` and `/<route>#section` links. It accounts for fixed-header height and CSS `scroll-margin-top`, then temporarily sets `tabindex="-1"` and focuses the target.
 
-## Learn More
+## Usage
 
-To learn more about Next.js, take a look at the following resources:
+```tsx
+import ScrollLink from "../components/ScrollLink";
+import Section from "../components/Section";
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<ScrollLink href="#apartments">Apartments</ScrollLink>
+<ScrollLink href="/#contact">Contact on the homepage</ScrollLink>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+<Section threshold={0.2} rootMargin="0px 0px -64px 0px" once staggerChildren={0.1}>
+  <article>First item</article>
+  <article>Second item</article>
+</Section>
+```
 
-## Deploy on Vercel
+The root layout wraps route children with `AnimatedLayout`. To customize route transitions, edit its `duration` and `easing` props in `app/layout.tsx`. Reveal timing and observer options can be set per `Section`. Anchor targets should have stable IDs and should use `scroll-margin-top` when they need a CSS-defined fixed-header offset.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+All components render useful HTML on the server. Anchors remain real links without JavaScript, and sections start visible in server-rendered HTML. Reduced-motion preferences turn off route, reveal, and smooth-scroll motion.
