@@ -13,6 +13,8 @@ type FlightPath = {
   length: number;
 };
 
+export type { FlightPath, Point };
+
 const FLIGHT_DURATION = 4500;
 const FLIGHT_END_DELAY = 300;
 
@@ -130,7 +132,7 @@ function appendCatmullRomSegment(
   }
 }
 
-function createFlightPath(width: number, height: number): FlightPath {
+export function createFlightPath(width: number, height: number): FlightPath {
   const radius = Math.min(width, height) * LOOP_RADIUS_RATIO;
   const waypoints: Point[] = [
     ...toViewportPoints(APPROACH_WAYPOINTS, width, height),
@@ -165,21 +167,26 @@ function createFlightPath(width: number, height: number): FlightPath {
   return { points, distances, length: distances[distances.length - 1] };
 }
 
-function pointAtDistance(path: FlightPath, targetDistance: number): Point {
+export function pointAtDistance(path: FlightPath, targetDistance: number): Point {
+  const lastIndex = path.points.length - 1;
+  if (lastIndex <= 0) return path.points[0] ?? { x: 0, y: 0 };
+
   let low = 1;
   let high = path.distances.length - 1;
+  const clampedDistance = Math.max(0, Math.min(targetDistance, path.length));
 
   while (low < high) {
     const middle = Math.floor((low + high) / 2);
-    if (path.distances[middle] < targetDistance) low = middle + 1;
+    if (path.distances[middle] < clampedDistance) low = middle + 1;
     else high = middle;
   }
 
-  const segmentStartDistance = path.distances[low - 1];
-  const segmentLength = path.distances[low] - segmentStartDistance || MIN_SEGMENT_LENGTH;
-  const amount = (targetDistance - segmentStartDistance) / segmentLength;
-  const start = path.points[low - 1];
-  const end = path.points[low];
+  const endIndex = Math.min(low, lastIndex);
+  const segmentStartDistance = path.distances[endIndex - 1];
+  const segmentLength = path.distances[endIndex] - segmentStartDistance || MIN_SEGMENT_LENGTH;
+  const amount = (clampedDistance - segmentStartDistance) / segmentLength;
+  const start = path.points[endIndex - 1];
+  const end = path.points[endIndex];
 
   return {
     x: start.x + (end.x - start.x) * amount,
@@ -187,7 +194,7 @@ function pointAtDistance(path: FlightPath, targetDistance: number): Point {
   };
 }
 
-function easeFlight(progress: number): number {
+export function easeFlight(progress: number): number {
   const eased =
     progress < EASE_RAMP
       ? (progress * progress) / EASE_RAMP_AREA
