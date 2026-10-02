@@ -42,7 +42,7 @@ export default async function DetailPage({ params }: DetailPageProps) {
       }}
     >
       <SiteHeader accent={project.theme.accent} />
-      <BackPill />
+      <BackPill slug={project.slug} cover={project.cover} alt={project.summary} />
 
       <main>
         <DetailHero project={project} />

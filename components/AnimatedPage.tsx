@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, type CSSProperties, type ReactNode } from "react";
+import { usePathname } from "next/navigation";
 import { motion, type Easing } from "framer-motion";
 import { scrollToAnchor, takePendingAnchor } from "../lib/anchor-navigation";
 import styles from "../styles/animated-layout.module.css";
@@ -38,6 +39,7 @@ export default function AnimatedPage({
   focusOnEnter,
 }: AnimatedPageProps) {
   const pageRef = useRef<HTMLDivElement>(null);
+  const livePathname = usePathname();
   const animationDuration = reducedMotion ? 0 : duration;
   const style = {
     "--duration": `${animationDuration}s`,
@@ -45,6 +47,11 @@ export default function AnimatedPage({
   } as AnimationStyle;
 
   function handleAnimationComplete() {
+    // `onAnimationComplete` also fires for the exit animation. With
+    // `mode="wait"` the incoming page has not mounted yet at that point, so a
+    // pending anchor would be consumed against a DOM that does not contain the
+    // target, and the navigation would silently land at the top instead.
+    if (pathname !== livePathname) return;
     if (!focusOnEnter) return;
 
     const pendingAnchor = takePendingAnchor(pathname);

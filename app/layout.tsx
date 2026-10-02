@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Montserrat } from "next/font/google";
+import { Cormorant_Garamond, Inter_Tight, Montserrat } from "next/font/google";
+import CoverTransitionLayer from "../components/CoverTransitionLayer";
+import ScrollReset from "../components/ScrollReset";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -14,6 +16,12 @@ const montserrat = Montserrat({
   weight: ["200", "300", "400", "500", "600", "700"],
 });
 
+const interTight = Inter_Tight({
+  variable: "--font-work",
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "AVA RESIDENCES — Résidences de luxe aux Jardins de Carthage",
   description: "AVA RESIDENCES — Appartements de luxe aux Jardins de Carthage. Investissement exclusif, finitions premium, visites privées.",
@@ -21,7 +29,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fr" className={`${cormorant.variable} ${montserrat.variable}`}>
+    <html lang="fr" className={`${cormorant.variable} ${montserrat.variable} ${interTight.variable}`}>
       <head>
         <link
           rel="stylesheet"
@@ -30,7 +38,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           referrerPolicy="no-referrer"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <ScrollReset />
+        {children}
+        <CoverTransitionLayer />
+      </body>
     </html>
   );
 }

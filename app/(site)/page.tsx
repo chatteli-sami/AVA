@@ -24,9 +24,9 @@ export default function Home() {
         <Section threshold={0.12} once>
           <FeaturesSection />
         </Section>
-        <Section threshold={0.12} once>
-          <GallerySection />
-        </Section>
+        {/* No <Section> wrapper: the gallery animates its own cards on scroll,
+            and a parent with `variants` would propagate down and override it. */}
+        <GallerySection />
         <Section threshold={0.12} once>
           <InventorySection />
         </Section>

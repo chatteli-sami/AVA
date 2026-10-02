@@ -1,14 +1,18 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import { EASE_OUT_EXPO, riseVariants, titleRevealVariants } from "../../lib/animations";
 import type { GalleryProject } from "../../types/gallery";
+import HeroRectReporter from "./HeroRectReporter";
 import styles from "../../styles/work.module.css";
 
 export default function DetailHero({ project }: { project: GalleryProject }) {
   const reduced = usePrefersReducedMotion();
+  // Held in state, not a ref, so the reporter re-renders once the node exists.
+  const [mediaEl, setMediaEl] = useState<HTMLDivElement | null>(null);
 
   return (
     <section className={styles.detailHero}>
@@ -82,8 +86,8 @@ export default function DetailHero({ project }: { project: GalleryProject }) {
       </div>
 
       <motion.div
+        ref={setMediaEl}
         className={styles.detailMedia}
-        layoutId={`cover-${project.slug}`}
         transition={{ duration: reduced ? 0 : 0.6, ease: EASE_OUT_EXPO }}
       >
         <Image
@@ -95,6 +99,7 @@ export default function DetailHero({ project }: { project: GalleryProject }) {
           priority
         />
       </motion.div>
+      <HeroRectReporter slug={project.slug} target={mediaEl} />
     </section>
   );
 }

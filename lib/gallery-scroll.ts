@@ -26,6 +26,16 @@ export function requestGalleryReturn(): void {
   }
 }
 
+/** True while a gallery return is queued, so route-change scroll resets stand down. */
+export function isGalleryReturnPending(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    return window.sessionStorage.getItem(RETURN_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
 /** Reads and clears any pending gallery return. */
 export function consumeGalleryReturn(): GalleryReturn | null {
   if (typeof window === "undefined") return null;
