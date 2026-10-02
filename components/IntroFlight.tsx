@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "../styles/intro-flight.module.css";
+import { lockPageScroll } from "../lib/scroll-lock";
 import { INTRO_SKIP_LABEL, INTRO_STATUS_LABEL, SITE_CONTENT_ID } from "./intro-flight.constants";
 
 type Point = { x: number; y: number };
@@ -17,6 +18,18 @@ export type { FlightPath, Point };
 
 const FLIGHT_DURATION = 4500;
 const FLIGHT_END_DELAY = 300;
+
+/**
+ * Module-scoped, so it lives exactly as long as the loaded document:
+ * a refresh (or a fresh tab) re-evaluates the module and the intro plays again,
+ * while a client-side navigation back to the home page does not replay it.
+ * `sessionStorage` cannot be used here because it survives a refresh.
+ */
+let introPlayed = false;
+
+export function resetIntroPlayback(): void {
+  introPlayed = false;
+}
 
 const BEAK_ANGLE = -64.7;
 
@@ -224,36 +237,6 @@ function measureBird(bird: HTMLImageElement): { width: number; height: number } 
     : { width: BIRD_WIDTH, height: BIRD_HEIGHT };
 }
 
-function lockPageScroll(): () => void {
-  const scrollY = window.scrollY;
-  const { style } = document.body;
-  const previous = {
-    overflow: style.overflow,
-    position: style.position,
-    top: style.top,
-    left: style.left,
-    right: style.right,
-    width: style.width,
-  };
-
-  style.overflow = "hidden";
-  style.position = "fixed";
-  style.top = `-${scrollY}px`;
-  style.left = "0";
-  style.right = "0";
-  style.width = "100%";
-
-  return () => {
-    style.overflow = previous.overflow;
-    style.position = previous.position;
-    style.top = previous.top;
-    style.left = previous.left;
-    style.right = previous.right;
-    style.width = previous.width;
-    window.scrollTo(0, scrollY);
-  };
-}
-
 export default function IntroFlight() {
   const birdRef = useRef<HTMLImageElement>(null);
   const trailRef = useRef<SVGPathElement>(null);
@@ -300,10 +283,12 @@ export default function IntroFlight() {
   const playIntro = useCallback(() => {
     stopFlight();
 
-    if (reducedMotionRef.current) {
+    if (reducedMotionRef.current || introPlayed) {
       finishIntro();
       return;
     }
+
+    introPlayed = true;
 
     const bird = birdRef.current;
     const trail = trailRef.current;

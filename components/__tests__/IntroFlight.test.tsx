@@ -3,6 +3,7 @@ import IntroFlight, {
   createFlightPath,
   easeFlight,
   pointAtDistance,
+  resetIntroPlayback,
   type FlightPath,
 } from "../IntroFlight";
 
@@ -169,6 +170,12 @@ describe("easeFlight", () => {
 });
 
 describe("IntroFlight", () => {
+  beforeEach(() => {
+    // The intro guards on module state, so each test needs a fresh module to
+    // observe it playing.
+    resetIntroPlayback();
+  });
+
   it("renders the skip control and announces its status while active", async () => {
     render(<IntroFlight />);
 
@@ -210,5 +217,35 @@ describe("IntroFlight", () => {
     await screen.findByRole("button", { name: /passer/i });
     expect(siteContent?.inert).toBe(true);
     expect(siteContent?.hasAttribute("inert")).toBe(true);
+  });
+
+  it("does not replay when the component remounts within the same document", async () => {
+    const first = render(<IntroFlight />);
+    await screen.findByRole("button", { name: /passer/i });
+    first.unmount();
+
+    render(<IntroFlight />);
+
+    await waitFor(() => {
+      expect(screen.queryByRole("button", { name: /passer/i })).not.toBeInTheDocument();
+    });
+    expect(screen.getByRole("status")).toHaveTextContent("");
+  });
+
+  it("plays again once the module is re-evaluated, as on a refresh", async () => {
+    const first = render(<IntroFlight />);
+    await screen.findByRole("button", { name: /passer/i });
+    first.unmount();
+
+    render(<IntroFlight />);
+    await waitFor(() => {
+      expect(screen.queryByRole("button", { name: /passer/i })).not.toBeInTheDocument();
+    });
+
+    // A refresh tears down the JS module, so the flag starts over.
+    resetIntroPlayback();
+
+    render(<IntroFlight />);
+    expect(await screen.findByRole("button", { name: /passer/i })).toBeInTheDocument();
   });
 });

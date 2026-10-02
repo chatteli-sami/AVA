@@ -31,17 +31,6 @@ export const features = [
   },
 ];
 
-export const gallerySlides = [
-  { src: "/images/SuitePanoramique.jpg", alt: "Chambre principale — Suite panoramique", title: "Chambre Principale", number: "01 / 08" },
-  { src: "/images/cuisine.jpg", alt: "Cuisine équipée design", title: "Cuisine avec passion", number: "02 / 08" },
-  { src: "/images/salonetsalleMange.jpg", alt: "Salon premium", title: "Grande vie au quotidien", number: "03 / 08" },
-  { src: "/images/piscine.jpg", alt: "Piscine privée", title: "Piscine privée", number: "04 / 08" },
-  { src: "/images/salonetsalleMange.jpg", alt: "Salon principal", title: "Salon principal", number: "05 / 08" },
-  { src: "/images/duplex.jpg", alt: "Duplex AVA", title: "Duplex AVA", number: "06 / 08" },
-  { src: "/images/salleManger.jpg", alt: "Salle à manger", title: "Salle à manger", number: "07 / 08" },
-  { src: "/images/couloir.jpg", alt: "Hall majestueux", title: "Hall majestueux", number: "08 / 08" },
-];
-
 export const inventory = {
   duplex: {
     label: "Duplex",

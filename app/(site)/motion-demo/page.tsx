@@ -1,6 +1,6 @@
-import ScrollLink from "../../components/ScrollLink";
-import Section from "../../components/Section";
-import styles from "../../styles/motion-demo.module.css";
+import ScrollLink from "../../../components/ScrollLink";
+import Section from "../../../components/Section";
+import styles from "../../../styles/motion-demo.module.css";
 
 const experiences = [
   { number: "01", title: "Route transitions", description: "Soft page transitions with reduced-motion support." },

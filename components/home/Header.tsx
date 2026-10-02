@@ -106,7 +106,7 @@ export default function Header() {
                 <li key={item.href} style={{ animationDelay: `${index * 100}ms` }}>
                   <ScrollLink
                     href={isHomePage ? item.href : `/${item.href}`}
-                    behavior="instant"
+                    behavior="smooth"
                     onNavigate={closeMenuImmediately}
                   >
                     <span className="fullscreen-menu-number">0{index + 1}</span>

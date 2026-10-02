@@ -1,0 +1,506 @@
+.shell {
+  --w-bg: #f0f0fa;
+  --w-ink: #0b0b12;
+  --w-muted: #6a6a7a;
+  --w-accent: #0b0b12;
+  --w-radius: 20px;
+  min-height: 100vh;
+  background: var(--w-bg);
+  color: var(--w-ink);
+  font-family: var(--font-work), "Helvetica Neue", Arial, sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+/* ---------------------------------------------------------------- header */
+
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem clamp(1rem, 3vw, 2.25rem);
+}
+
+/* Difference blending keeps the pills legible on both light and dark pages. */
+.headerBlend {
+  mix-blend-mode: difference;
+  color: #ffffff;
+}
+
+/* Detail pages have a known background, so explicit colours beat blending. */
+.headerSolid {
+  color: var(--w-accent);
+}
+
+.logo {
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  color: inherit;
+  text-decoration: none;
+  transition: color 620ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pills {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.iconPill,
+.talkPill,
+.menuPill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.4rem;
+  padding: 0 0.9rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 260ms ease, color 260ms ease, border-color 260ms ease;
+}
+
+.iconPill {
+  width: 2.4rem;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.talkPill {
+  background: #0b0b12;
+  border-color: #0b0b12;
+  color: #ffffff;
+}
+
+.menuPill {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #0b0b12;
+}
+
+.headerBlend .talkPill {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #000000;
+}
+
+.iconPill:hover,
+.menuPill:hover {
+  background: currentColor;
+  color: var(--w-bg);
+}
+
+.talkPill:hover {
+  background: #2a2a38;
+  border-color: #2a2a38;
+  color: #ffffff;
+}
+
+.iconPill:focus-visible,
+.talkPill:focus-visible,
+.menuPill:focus-visible,
+.menuLink:focus-visible,
+.logo:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.menuPanel {
+  position: absolute;
+  top: 4.4rem;
+  right: clamp(1rem, 3vw, 2.25rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 12rem;
+  padding: 0.6rem;
+  border-radius: 16px;
+  background: var(--w-bg);
+  color: var(--w-ink);
+  box-shadow: 0 30px 60px -30px rgba(11, 11, 18, 0.5);
+  mix-blend-mode: normal;
+}
+
+.menuLink {
+  padding: 0.6rem 0.75rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  color: inherit;
+  text-decoration: none;
+  transition: background-color 200ms ease;
+}
+
+.menuLink:hover {
+  background: rgba(11, 11, 18, 0.06);
+}
+
+.detailHero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+  padding: clamp(7rem, 15vh, 11rem) clamp(1rem, 4vw, 3rem) clamp(3rem, 8vh, 6rem);
+}
+
+.detailHeroText {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.detailEyebrow {
+  margin: 0;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.detailTitle {
+  margin: 0;
+  font-size: clamp(48px, 7vw, 104px);
+  font-weight: 500;
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+}
+
+.detailSummary {
+  margin: 0;
+  max-width: 46ch;
+  color: var(--w-fg-muted, currentColor);
+  opacity: 0.82;
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+.detailLists {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 2rem;
+  margin-top: 0.75rem;
+}
+
+.detailListTitle {
+  margin: 0 0 0.75rem;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.detailPairs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin: 0;
+}
+
+.detailPair {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.25);
+  font-size: 0.88rem;
+}
+
+.detailPair dt {
+  opacity: 0.6;
+}
+
+.detailPair dd {
+  margin: 0;
+}
+
+.detailFeatures {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.88rem;
+}
+
+.detailFeatures li::before {
+  content: "â€” ";
+  opacity: 0.5;
+}
+
+.detailCta {
+  align-self: flex-start;
+  margin-top: 0.75rem;
+  padding: 0.7rem 1.5rem;
+  border: 1px solid;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 260ms ease, color 260ms ease;
+}
+
+.detailCta:hover {
+  background: currentColor;
+}
+
+.detailCta:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.detailMedia {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--w-radius);
+}
+
+.detailImage {
+  object-fit: cover;
+}
+
+/* ---------------------------------------------------- horizontal gallery */
+
+.hScroll {
+  position: relative;
+}
+
+.hSticky {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Reduced motion: no transform, so fall back to native horizontal scrolling. */
+.hStickyReduced {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x proximity;
+}
+
+.hScrollReduced {
+  position: relative;
+  height: auto;
+}
+
+.hTrack {
+  display: flex;
+  gap: 4vw;
+  width: max-content;
+  padding-right: 6vw;
+}
+
+.hFrame {
+  position: relative;
+  flex: none;
+  width: min(68vw, 1100px);
+  height: 70vh;
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--w-radius);
+  background: rgba(128, 128, 128, 0.18);
+  will-change: transform, filter;
+}
+
+.hFrameInner {
+  position: absolute;
+  inset: -4%;
+}
+
+.hImage {
+  object-fit: cover;
+}
+
+.hHint {
+  position: absolute;
+  bottom: 2.25rem;
+  left: 50%;
+  margin: 0;
+  transform: translateX(-50%);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  opacity: 0.65;
+}
+
+/* ------------------------------------------------------- footer + back */
+
+.backPill {
+  position: fixed;
+  top: 1.1rem;
+  left: 50%;
+  z-index: 950;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 1.1rem;
+  border: 0;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #0b0b12;
+  font-family: var(--font-work), sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 12px 30px -16px rgba(11, 11, 18, 0.6);
+  transition: transform 240ms ease;
+}
+
+.backPill:hover {
+  transform: translateY(-2px);
+}
+
+.backPill:focus-visible {
+  outline: 2px solid #0b0b12;
+  outline-offset: 3px;
+}
+
+.detailFooter {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: clamp(4rem, 10vh, 8rem) clamp(1rem, 4vw, 3rem) clamp(3rem, 8vh, 6rem);
+}
+
+.detailFooterLabel {
+  margin: 0 0 0.5rem;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.detailNext {
+  font-size: clamp(2rem, 5vw, 3.75rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 240ms ease;
+}
+
+.detailNext:hover {
+  opacity: 0.6;
+}
+
+.detailFooterActions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.detailBackHome,
+.detailContact {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.65rem 1.4rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 240ms ease, color 240ms ease;
+}
+
+.detailBackHome:hover {
+  background: currentColor;
+  color: var(--w-bg);
+}
+
+.detailContact {
+  border-color: transparent;
+}
+
+.detailContact:hover {
+  opacity: 0.82;
+}
+
+.detailBackHome:focus-visible,
+.detailContact:focus-visible,
+.detailNext:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* ----------------------------------------------------------- responsive */
+
+@media (max-width: 900px) {
+  .detailHero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .detailMedia {
+    aspect-ratio: 16 / 11;
+  }
+
+  .detailLists {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hFrame {
+    width: 88vw;
+    height: 58vh;
+  }
+
+  .header {
+    padding: 0.85rem 1rem;
+  }
+
+  .talkPill {
+    display: none;
+  }
+
+  .menuPanel {
+    top: 3.8rem;
+    right: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backPill,
+  .detailNext,
+  .detailBackHome,
+  .detailContact,
+  .detailCta,
+  .logo {
+    transition: none;
+  }
+
+  .backPill:hover {
+    transform: none;
+  }
+
+  .hFrame {
+    will-change: auto;
+  }
+}
