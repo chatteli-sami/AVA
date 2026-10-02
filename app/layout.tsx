@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Montserrat } from "next/font/google";
 import AnimatedLayout from "../components/AnimatedLayout";
 import IntroFlight from "../components/IntroFlight";
+import { SITE_CONTENT_ID } from "../components/intro-flight.constants";
 import Header from "../components/home/Header";
 import "./globals.css";
 
@@ -35,7 +36,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       </head>
       <body>
         <IntroFlight />
-        <div id="site-content">
+        <div id={SITE_CONTENT_ID}>
           <Header />
           <AnimatedLayout duration={0.42} easing={[0.22, 1, 0.36, 1]}>
             {children}
