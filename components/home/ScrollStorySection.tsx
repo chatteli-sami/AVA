@@ -51,6 +51,7 @@ export default function ScrollStorySection() {
           <span>Réservez votre visite</span>
         </FadeOverlay>
       </ScrollVideo>
+      <div id="video-end-sentinel" aria-hidden="true" />
     </section>
   );
 }

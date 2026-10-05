@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useRef, type CSSProperties, type MouseEvent } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, type CSSProperties, type MouseEvent } from "react";
 import { galleryProjects } from "../../data/gallery";
 import type { GalleryProject } from "../../types/gallery";
 import { scrollToAnchor } from "../../lib/anchor-navigation";
-import { consumeGalleryReturn, isGalleryReturnPending, rememberGalleryScroll } from "../../lib/gallery-scroll";
+import { clearGalleryReturn, peekGalleryReturn, rememberGalleryScroll } from "../../lib/gallery-scroll";
 import { isCoverTransitionBusy, openCover, preloadCover, reportGalleryRect } from "../../lib/cover-transition";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import { useRevealOnScroll } from "../../hooks/useRevealOnScroll";
@@ -15,8 +15,13 @@ const RIGHT_COLUMN_RISE = "60px";
 const LEFT_COLUMN_RISE = "40px";
 const RIGHT_COLUMN_DELAY = "100ms";
 
-/** Long enough to outlast the gallery's own scroll restore, which re-applies for ~1.5s. */
+/**
+ * Long enough to outlast the gallery's own scroll restore, which re-applies for
+ * ~1.5s as late images land.
+ */
 const RETURN_REPORT_FRAMES = 100;
+
+const useIsomorphicLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect;
 
 type RevealStyle = CSSProperties & {
   "--gallery-rise": string;
@@ -56,7 +61,8 @@ function GalleryCard({ project, index }: { project: GalleryProject; index: numbe
   // shrink onto it. The gallery restores its scroll offset over several frames,
   // so the position is republished until it settles.
   useEffect(() => {
-    if (!isGalleryReturnPending()) return undefined;
+    const record = peekGalleryReturn();
+    if (!record?.slug) return undefined;
     const card = cardRef.current;
     if (!card) return undefined;
 
@@ -91,7 +97,9 @@ function GalleryCard({ project, index }: { project: GalleryProject; index: numbe
     if (!media || !image) return;
 
     event.preventDefault();
-    rememberGalleryScroll();
+    // Records both the offset and the slug before anything can navigate, so all
+    // three ways back (button, browser button, gesture) can find this card.
+    rememberGalleryScroll(project.slug);
     preloadCover(project.cover);
 
     openCover({
@@ -142,16 +150,20 @@ function GalleryCard({ project, index }: { project: GalleryProject; index: numbe
 export default function GallerySection() {
   // Returning from a project detail page: restore the exact list offset, or fall
   // back to the section itself when the visitor arrived here without one.
-  useEffect(() => {
-    const pending = consumeGalleryReturn();
-    if (!pending) return;
+  //
+  // A layout effect, not a passive one: the offset has to be in place before the
+  // first paint or the visitor sees the top of the page and then watches it jump.
+  useIsomorphicLayoutEffect(() => {
+    const record = peekGalleryReturn();
+    if (!record) return undefined;
 
-    if (pending.scrollY === null) {
+    if (record.scrollY === null) {
       scrollToAnchor("gallery", { behavior: "instant" });
-      return;
+      clearGalleryReturn();
+      return undefined;
     }
 
-    const target = pending.scrollY;
+    const target = record.scrollY;
     const apply = () => window.scrollTo({ top: target, behavior: "instant" });
 
     // Scroll anchoring pins the viewport while late-loading images above resize
@@ -169,6 +181,9 @@ export default function GallerySection() {
       window.setTimeout(() => {
         document.body.style.overflowAnchor = previousAnchor;
       }, 1500),
+      // Held until the restore has settled. Clearing earlier would let a second
+      // Back within the window find nothing to return to.
+      window.setTimeout(() => clearGalleryReturn(), 1600),
     ];
 
     return () => {

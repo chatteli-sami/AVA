@@ -23,8 +23,9 @@ export default function ScrollReset() {
   const isFirstRender = useRef(true);
 
   // Take the scroll position away from the browser so it cannot restore a stale
-  // offset behind our back on back/forward navigation.
-  useEffect(() => {
+  // offset behind our back on back/forward navigation. This has to happen before
+  // the first paint: a bfcache restore would otherwise race it.
+  useLayoutEffect(() => {
     const previous = window.history.scrollRestoration;
     window.history.scrollRestoration = "manual";
     return () => {

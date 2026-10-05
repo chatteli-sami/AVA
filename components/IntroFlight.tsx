@@ -20,10 +20,14 @@ const FLIGHT_DURATION = 4500;
 const FLIGHT_END_DELAY = 300;
 
 /**
- * Module-scoped, so it lives exactly as long as the loaded document:
- * a refresh (or a fresh tab) re-evaluates the module and the intro plays again,
- * while a client-side navigation back to the home page does not replay it.
- * `sessionStorage` cannot be used here because it survives a refresh.
+ * Module-scoped, so its lifetime is exactly one loaded document.
+ *
+ * This is the scope the intro is wanted in: a refresh (or a fresh tab) evaluates
+ * the module again and the intro plays, while a client-side navigation — back
+ * from a project page, or a menu link — reuses the module and does not replay it.
+ *
+ * `sessionStorage` is deliberately not used here. It outlives the document, so it
+ * would also suppress the intro on refresh, which is not wanted.
  */
 let introPlayed = false;
 

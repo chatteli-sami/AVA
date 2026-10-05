@@ -113,10 +113,15 @@ export default function HorizontalGallery({ project }: { project: GalleryProject
           ))}
         </motion.div>
 
+        {/* `hintOpacity` is derived from scroll position, which only exists on the
+            client: the server serialises the MotionValue's initial value and the
+            client recomputes it from real geometry, so the two `style` attributes
+            disagree. The hint is decorative, so there is nothing to reconcile. */}
         <motion.p
           className={styles.hHint}
           style={reduced ? { opacity: 0 } : { opacity: hintOpacity }}
           aria-hidden="true"
+          suppressHydrationWarning
         >
           Scroll to explore
         </motion.p>

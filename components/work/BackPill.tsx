@@ -3,8 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { isCoverTransitionBusy, returnCover } from "../../lib/cover-transition";
-import { requestGalleryReturn } from "../../lib/gallery-scroll";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
+import { requestGalleryReturn, peekGalleryReturn } from "../../lib/gallery-scroll";
 import styles from "../../styles/work.module.css";
 
 interface BackPillProps {
@@ -21,12 +21,15 @@ export default function BackPill({ label = "Back to gallery", slug, cover, alt }
   const handleClick = useCallback(() => {
     if (isCoverTransitionBusy()) return;
 
-    // The gallery restores the list offset it was left at instead of dropping the
-    // visitor back at the top of the page.
-    requestGalleryReturn();
+    // The card click already recorded the offset and this slug, and that record
+    // is what the gallery restores from. It is deliberately left in place rather
+    // than being re-armed here, so a reload on this page still has something to
+    // return to. Nothing to do when the page was opened directly.
+    const record = peekGalleryReturn();
 
     if (reduced) {
       router.push("/");
+      if (!record) requestGalleryReturn();
       return;
     }
 

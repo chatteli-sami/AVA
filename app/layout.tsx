@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter_Tight, Montserrat } from "next/font/google";
 import CoverTransitionLayer from "../components/CoverTransitionLayer";
 import ScrollReset from "../components/ScrollReset";
+import GalleryReturnWatcher from "../components/GalleryReturnWatcher";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -38,8 +39,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           referrerPolicy="no-referrer"
         />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <ScrollReset />
+        <GalleryReturnWatcher />
         {children}
         <CoverTransitionLayer />
       </body>

@@ -1,0 +1,510 @@
+/* ------------------------------------------------------------------ palette
+ * The entire section is driven by these variables. To relaunch your
+ * palette, edit only the values below (plus --fs-fs-font and the two
+ * font variables) — no other rule hard-codes a colour.
+ * ------------------------------------------------------------------------- */
+:root {
+  /* ---- light theme (default) ---- */
+  --fs-fs-bg: #e9e0d4;
+  --fs-fs-card: #fbf8f3;
+  --fs-fs-text: #2b2119;
+  --fs-fs-muted: #76685a;
+  --fs-fs-gold: #b4793f;
+  --fs-fs-gold-light: #e0b883;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* ---- dark theme ---- */
+    --fs-fs-bg: #130f0b;
+    --fs-fs-card: #1f1812;
+    --fs-fs-text: #f3eadc;
+    --fs-fs-muted: #b8a892;
+    --fs-fs-gold: #c8955a;
+    --fs-fs-gold-light: #d4b89e;
+  }
+}
+
+/* ------------------------------------------------------------------- section */
+.section {
+  --fs-fs-bg: #e9e0d4;
+  --fs-fs-card: #fbf8f3;
+  --fs-fs-text: #2b2119;
+  --fs-fs-muted: #76685a;
+  --fs-fs-gold: #b4793f;
+  --fs-fs-gold-light: #e0b883;
+
+  position: relative;
+  background: var(--fs-fs-bg);
+  color: var(--fs-fs-text);
+  padding: clamp(64px, 10vh, 120px) 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .section {
+    --fs-fs-bg: #130f0b;
+    --fs-fs-card: #1f1812;
+    --fs-fs-text: #f3eadc;
+    --fs-fs-muted: #b8a892;
+    --fs-fs-gold: #c8955a;
+    --fs-fs-gold-light: #d4b89e;
+  }
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-inline: clamp(16px, 4vw, 44px);
+}
+
+/* ------------------------------------------------------------------ header */
+.header {
+  max-width: 720px;
+  margin: 0 auto clamp(40px, 8vh, 96px);
+  padding-inline: clamp(12px, 3vw, 32px);
+  text-align: center;
+}
+
+.kicker {
+  display: block;
+  margin: 0 0 12px;
+  font-family: var(--font-work), var(--font-montserrat), system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--fs-fs-gold);
+}
+
+.title {
+  margin: 0 0 14px;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(28px, 4.2vw, 48px);
+  font-weight: 400;
+  line-height: 1.06;
+  color: var(--fs-fs-text);
+  letter-spacing: -0.015em;
+}
+
+.luxe {
+  color: var(--fs-fs-gold);
+  font-style: italic;
+  position: relative;
+  display: inline-block;
+}
+
+.luxe::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    var(--fs-fs-gold-light) 0%,
+    var(--fs-fs-gold) 52%,
+    var(--fs-fs-gold-light) 100%
+  );
+  background-size: 220% 100%;
+  background-position: 200% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: fsShimmer 6s ease-in-out infinite;
+}
+
+.ornament {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.ornamentLine {
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: var(--fs-fs-gold);
+}
+
+.ornamentDiamond {
+  display: block;
+  width: 10px;
+  height: 10px;
+  background: var(--fs-fs-gold);
+  transform: rotate(45deg);
+}
+
+/* ------------------------------------------------------------------- grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(22px, 4vw, 34px);
+  margin: clamp(56px, 10vh, 100px) 0;
+}
+
+/* ------------------------------------------------------------------- card */
+.featureCard {
+  position: relative;
+  background: var(--fs-fs-card);
+  border-radius: 20px;
+  padding: clamp(30px, 4.5vw, 48px);
+  padding-bottom: clamp(34px, 5vw, 54px);
+  overflow: visible;
+  will-change: transform, opacity;
+  transition:
+    transform 0.65s var(--easing),
+    opacity 0.65s var(--easing),
+    box-shadow 0.5s var(--easing);
+  opacity: 0;
+  transform: translateY(70px);
+  display: grid;
+  place-items: center;
+  outline: none;
+  z-index: 1;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(18px, 3vw, 24px);
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+  margin: 0 auto;
+  z-index: 2;
+}
+
+.featureCard:focus-visible,
+.featureCard.hovered {
+  outline: 2px solid var(--fs-fs-gold);
+  outline-offset: 2px;
+  z-index: 4;
+}
+
+/* reveal on scroll */
+.featureCard.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* inner gold frame */
+.featureCard::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border: 1px solid var(--fs-fs-gold);
+  border-radius: 18px;
+  pointer-events: none;
+  opacity: 0.5;
+  z-index: 0;
+  transition:
+    inset 0.5s var(--easing),
+    opacity 0.5s var(--easing),
+    border-color 0.4s var(--easing);
+}
+
+.featureCard.hovered::before {
+  inset: 18px;
+  opacity: 0.85;
+  border-color: var(--fs-fs-gold-light);
+}
+
+/* small top-left number */
+.cardNumber {
+  position: absolute;
+  top: 24px;
+  left: 26px;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--fs-fs-gold);
+  z-index: 2;
+}
+
+/* icon circle + dotted ring */
+.iconWrapper {
+  position: relative;
+  width: 6.5rem;
+  height: 6.5rem;
+  display: grid;
+  place-items: center;
+  z-index: 2;
+  transform: translateZ(0);
+}
+
+.iconWrapper .iconCircle {
+  position: absolute;
+  inset: -4px;
+  border: 1px solid var(--fs-fs-gold);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 0 0 3px rgba(180, 121, 63, 0.12), inset 0 0 0 1px rgba(180, 121, 63, 0.3);
+  transition:
+    transform 0.5s var(--easing),
+    box-shadow 0.5s var(--easing);
+}
+
+.iconWrapper .dottedRing {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  color: var(--fs-fs-gold-light);
+  pointer-events: none;
+  transition: transform 0.5s var(--easing);
+}
+
+.iconWrapper .dottedRing circle {
+  fill: transparent;
+  stroke: var(--fs-fs-gold-light);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  opacity: 0.55;
+}
+
+/* content */
+.featureCard .cardTitle {
+  margin: 0 0 12px;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(18px, 2.4vw, 24px);
+  font-weight: 500;
+  line-height: 1.24;
+  color: var(--fs-fs-text);
+  transition: color 0.4s var(--easing);
+  z-index: 2;
+}
+
+.featureCard.hovered .cardTitle {
+  color: var(--fs-fs-text);
+}
+
+.featureCard .cardText {
+  margin: 0;
+  font-family: var(--font-work), var(--font-montserrat), system-ui, sans-serif;
+  font-size: clamp(13.5px, 1.05vw, 15px);
+  font-weight: 300;
+  line-height: 1.66;
+  color: var(--fs-fs-muted);
+  transition: color 0.4s var(--easing);
+  z-index: 2;
+}
+
+/* bottom tag with lines */
+.featureCard .cardTag {
+  margin-top: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(10px, 1.8vw, 14px);
+  font-family: var(--font-work), var(--font-montserrat), system-ui, sans-serif;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fs-fs-gold);
+  z-index: 2;
+}
+
+.featureCard .tagLine {
+  display: block;
+  width: 44px;
+  height: 1px;
+  background: var(--fs-fs-gold);
+  transition: background 0.4s var(--easing);
+}
+
+.featureCard.hovered .tagLine {
+  background: var(--fs-fs-gold-light);
+}
+
+/* watermark (outline number) */
+.featureCard .cardWatermark {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(60px, 5vw, 80px);
+  font-weight: 500;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.3px var(--fs-fs-gold);
+  text-stroke: 1.3px var(--fs-fs-gold);
+  transition:
+    color 0.4s var(--easing),
+    transform 0.5s var(--easing),
+    -webkit-text-stroke 0.4s var(--easing);
+  text-stroke-width: 1.3px;
+  text-stroke-color: var(--fs-fs-gold);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.featureCard.hovered .cardWatermark {
+  color: var(--fs-fs-gold-light);
+  transform: translateY(-8px);
+}
+
+/* stats strip */
+.statsStrip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 30px clamp(24px, 4vw, 30px) 0;
+  list-style: none;
+  margin: clamp(44px, 8vh, 72px) auto 0;
+  padding: 0;
+  max-width: 700px;
+  justify-content: center;
+}
+
+.statItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: max-content;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s var(--easing), transform 0.5s var(--easing);
+}
+
+.featureCard.visible .statItem,
+.featureCard.visible .statItem.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.statItem.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.statValue {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 400;
+  color: var(--fs-fs-gold);
+}
+
+.statLabel {
+  font-family: var(--font-work), var(--font-montserrat), system-ui, sans-serif;
+  font-size: clamp(12px, 1vw, 13.5px);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  color: var(--fs-fs-muted);
+}
+
+/* animations */
+@keyframes fsShimmer {
+  0%, 100% { background-position: 200% 0; }
+  50% { background-position: -20% 0; }
+}
+
+/* reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .featureCard,
+  .featureCard.visible,
+  .statItem,
+  .statItem.visible,
+  .featureCard::before {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .featureCard.hovered::before {
+    inset: 14px !important;
+    opacity: 0.5 !important;
+  }
+
+  .featureCard .cardWatermark {
+    transform: none !important;
+    color: var(--fs-fs-gold) !important;
+  }
+}
+
+/* ------------------------------------------------------------------ responsive */
+/* large desktop (1280px and up) — default already applies */
+/* laptop and tablet landscape (901px to 1279px) */
+@media (max-width: 1279px) and (min-width: 901px) {
+  .section .container {
+    max-width: 1080px;
+    padding-inline: clamp(20px, 3vw, 40px);
+  }
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(18px, 3vw, 28px);
+  }
+  .featureCard {
+    padding: clamp(24px, 3.5vw, 40px);
+    padding-bottom: clamp(28px, 4vw, 48px);
+  }
+}
+
+/* tablet portrait and large phone (up to 900px) */
+@media (max-width: 900px) {
+  .section .container {
+    max-width: 540px;
+    padding-inline: clamp(16px, 4vw, 28px);
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: clamp(20px, 3vw, 30px);
+  }
+  .featureCard {
+    margin-top: 0 !important;
+    min-height: auto;
+    padding: clamp(20px, 4vw, 32px);
+    padding-bottom: clamp(24px, 5vw, 40px);
+  }
+  .featureCard .cardWatermark {
+    font-size: clamp(44px, 4vw, 60px);
+    bottom: 20px;
+    right: 20px;
+  }
+  .statsStrip {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    max-width: 280px;
+  }
+}
+
+/* small phone (up to 400px) */
+@media (max-width: 400px) {
+  .section .container {
+    padding-inline: 12px;
+  }
+  .grid {
+    gap: 16px;
+  }
+  .featureCard {
+    border-radius: 16px;
+    padding: clamp(16px, 4vw, 24px);
+    padding-bottom: clamp(20px, 5vw, 32px);
+  }
+  .featureCard .cardNumber,
+  .featureCard .cardWatermark,
+  .featureCard .cardBody {
+    transform: scale(0.92);
+  }
+  .featureCard .iconWrapper {
+    width: 5.5rem;
+    height: 5.5rem;
+  }
+}
+
+/* isolate viewport meta tag (applied in layout) */
+/* Add this in the html tag in layout.tsx (not in CSS module): <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" /> */
+
+/* safe area padding for phones with notches (optional, can be added to body) */
+@media (max-width: 400px) {
+  body {
+    padding-inline: env(safe-area-inset-left);
+    padding-inline: env(safe-area-inset-right);
+  }
+}

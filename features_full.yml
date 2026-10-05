@@ -1,0 +1,368 @@
+- generic [active] [ref=f10e1]:
+  - generic [ref=f10e2]:
+    - banner [ref=f10e3]:
+      - generic [ref=f10e4]:
+        - img "Logo AVA Tunis" [ref=f10e6]
+        - button "Ouvrir le menu" [ref=f10e7] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f10e8]: 
+    - region "Contenu de la page" [ref=f10e9]:
+      - main [ref=f10e10]:
+        - region "Visite immersive AVA" [ref=f10e11]:
+          - generic [ref=f10e13]:
+            - generic:
+              - generic:
+                - generic: Immersion AVA
+                - heading "Un art de vivre pensé pour les moments qui comptent." [level=2]
+              - generic:
+                - paragraph: Espaces lumineux, finitions premium et vues dignes d’une villa contemporaine.
+              - generic: Réservez votre visite
+        - generic [ref=f10e18]:
+          - img "Emblème AVA" [ref=f10e20]
+          - generic [ref=f10e21]:
+            - generic [ref=f10e22]: Signature Residences
+            - img "Une mélodie de luxe et de raffinement" [ref=f10e23]
+            - paragraph [ref=f10e24]: Dans l’univers fascinant d’AVA Residences, où chaque espace inspire le génie des plus grands maîtres. Découvrez un projet unique, conçu majestueusement pour éveiller vos sens et sublimer votre quotidien.
+            - generic [ref=f10e25]:
+              - generic [ref=f10e26]:
+                - generic [ref=f10e27]: "20"
+                - generic [ref=f10e28]: Unités haut standing
+              - generic [ref=f10e29]:
+                - generic [ref=f10e30]: S+3 & S+4
+                - generic [ref=f10e31]: Typologies disponibles
+              - generic [ref=f10e32]:
+                - generic [ref=f10e33]: "8"
+                - generic [ref=f10e34]: Duplex
+            - generic [ref=f10e35]:
+              - link "Accéder à l’expérience AVA" [ref=f10e36] [cursor=pointer]:
+                - /url: /pack
+              - link "Réserver ma visite" [ref=f10e37] [cursor=pointer]:
+                - /url: "#contact"
+        - region [ref=f10e39]:
+          - generic [ref=f10e40]:
+            - paragraph [ref=f10e41]: Localisation
+            - heading "À proximité" [level=2] [ref=f10e42]
+            - paragraph [ref=f10e43]: La résidence se situe au cœur des Jardins de Carthage, à quelques minutes des lieux qui comptent.
+          - list [ref=f10e45]:
+            - listitem [ref=f10e46]:
+              - generic [ref=f10e48]:
+                - generic [ref=f10e49]: "00"
+                - generic [ref=f10e50]: MIN
+              - generic [ref=f10e51]:
+                - paragraph [ref=f10e52]: À 5 minutes
+                - heading "Tunisia Mall" [level=3] [ref=f10e53]
+                - paragraph [ref=f10e54]: Commerces, restaurants et cinéma.
+            - listitem [ref=f10e59]:
+              - generic [ref=f10e61]:
+                - generic [ref=f10e62]: "00"
+                - generic [ref=f10e63]: MIN
+              - generic [ref=f10e64]:
+                - paragraph [ref=f10e65]: À 9 minutes
+                - heading "Carrefour" [level=3] [ref=f10e66]
+                - paragraph [ref=f10e67]: Les courses du quotidien, à portée de main.
+            - listitem [ref=f10e73]:
+              - generic [ref=f10e75]:
+                - generic [ref=f10e76]: "00"
+                - generic [ref=f10e77]: MIN
+              - generic [ref=f10e78]:
+                - paragraph [ref=f10e79]: À 10 minutes
+                - heading "La Marsa" [level=3] [ref=f10e80]
+                - paragraph [ref=f10e81]: Front de mer, terrasses et week-ends.
+            - listitem [ref=f10e86]:
+              - generic [ref=f10e88]:
+                - generic [ref=f10e89]: "00"
+                - generic [ref=f10e90]: MIN
+              - generic [ref=f10e91]:
+                - paragraph [ref=f10e92]: À 15 minutes
+                - heading "Aéroport Tunis-Carthage" [level=3] [ref=f10e93]
+                - paragraph [ref=f10e94]: Toutes les liaisons internationales.
+        - region [ref=f10e99]:
+          - generic [ref=f10e100]:
+            - generic [ref=f10e101]:
+              - generic [ref=f10e102]: Signature Residences
+              - heading "Une mélodie de luxe et de raffinement" [level=2] [ref=f10e103]:
+                - text: Une mélodie de
+                - generic [ref=f10e104]: luxe
+                - text: et de raffinement
+            - list [ref=f10e109]:
+              - article "Emplacement exclusif" [ref=f10e110]:
+                - generic [ref=f10e111]: "01"
+                - generic [ref=f10e112]:
+                  - heading "Emplacement exclusif" [level=3] [ref=f10e118]
+                  - paragraph [ref=f10e119]: Au cœur des Jardins de Carthage, 10 minutes de l'aéroport, 5 minutes de Tunisia Mall, proche universités, écoles, banques et assurances.
+                  - generic [ref=f10e120]: Carthage
+                - generic [aria-hidden]: "1"
+              - article "Luxe & bien-être" [ref=f10e123]:
+                - generic [ref=f10e124]: "02"
+                - generic [ref=f10e125]:
+                  - heading "Luxe & bien-être" [level=3] [ref=f10e130]
+                  - paragraph [ref=f10e131]: Aux étages, des piscines privatives offrent un havre de tranquillité, un cadre intime et exclusif.
+                  - generic [ref=f10e132]: Piscines privatives
+                - generic [aria-hidden]: "2"
+              - article "Élégance & confort" [ref=f10e135]:
+                - generic [ref=f10e136]: "03"
+                - generic [ref=f10e137]:
+                  - heading "Élégance & confort" [level=3] [ref=f10e142]
+                  - paragraph [ref=f10e143]: Chaque détail crée une atmosphère d'élégance subtile et de luxe raffiné.
+                  - generic [ref=f10e144]: Détails raffinés
+                - generic [aria-hidden]: "3"
+            - list "Statistiques clés" [ref=f10e147]:
+              - listitem [ref=f10e148]:
+                - generic "de l'aéroport" [ref=f10e149]: 10 MIN
+                - generic [ref=f10e150]: de l'aéroport
+              - listitem [ref=f10e151]:
+                - generic "de Tunisia Mall" [ref=f10e152]: 5 MIN
+                - generic [ref=f10e153]: de Tunisia Mall
+              - listitem [ref=f10e154]:
+                - generic "Élégance & calme"
+                - generic [ref=f10e155]: Élégance & calme
+        - region [ref=f10e156]:
+          - generic [ref=f10e157]:
+            - generic [ref=f10e158]:
+              - paragraph [ref=f10e159]: Nos réalisations
+              - heading "Galerie" [level=2] [ref=f10e160]
+              - paragraph [ref=f10e161]: Une sélection de projets d’intérieur et d’architecture livrés entre Tunis et les Jardins de Carthage.
+            - generic [ref=f10e162]:
+              - article [ref=f10e163]:
+                - link "Duplex AVA — voir le projet" [ref=f10e164] [cursor=pointer]:
+                  - /url: /gallery/duplex-ava
+                  - generic [ref=f10e165]: Interior • Architecture • Photography
+                  - heading "Duplex AVA" [level=3] [ref=f10e166]
+                  - img "Duplex AVA — Une double hauteur traversante où la lumière du nord sculpte chaque matière." [ref=f10e168]
+                  - generic [ref=f10e169]: Jardins de Carthage • 2025 • 152 m²
+              - article [ref=f10e170]:
+                - link "Suite Panoramique — voir le projet" [ref=f10e171] [cursor=pointer]:
+                  - /url: /gallery/suite-panoramique
+                  - generic [ref=f10e172]: Interior • Joinery • Photography
+                  - heading "Suite Panoramique" [level=3] [ref=f10e173]
+                  - img "Suite Panoramique — Une suite ouverte sur trois orientations, du matin au soir." [ref=f10e175]
+                  - generic [ref=f10e176]: Jardins de Carthage • 2025 • 146 m²
+              - article [ref=f10e177]:
+                - link "Piscine Privée — voir le projet" [ref=f10e178] [cursor=pointer]:
+                  - /url: /gallery/piscine-privee
+                  - generic [ref=f10e179]: Landscape • Exterior • Photography
+                  - heading "Piscine Privée" [level=3] [ref=f10e180]
+                  - img "Piscine Privée — Un miroir d’eau au-dessus de la ville, adossé aux terrasses." [ref=f10e182]
+                  - generic [ref=f10e183]: Jardins de Carthage • 2024 • 28 m²
+              - article [ref=f10e184]:
+                - link "Cuisine Signature — voir le projet" [ref=f10e185] [cursor=pointer]:
+                  - /url: /gallery/cuisine-signature
+                  - generic [ref=f10e186]: Interior • Joinery • Photography
+                  - heading "Cuisine Signature" [level=3] [ref=f10e187]
+                  - img "Cuisine Signature — Une enfilade de pierre et de métal Asteroid, ouverte sur la table." [ref=f10e189]
+                  - generic [ref=f10e190]: Jardins de Carthage • 2025 • 22 m²
+              - article [ref=f10e191]:
+                - link "Façade Principale — voir le projet" [ref=f10e192] [cursor=pointer]:
+                  - /url: /gallery/facade-principale
+                  - generic [ref=f10e193]: Exterior • Architecture • Photography
+                  - heading "Façade Principale" [level=3] [ref=f10e194]
+                  - img "Façade Principale — Une façade retravaillée pour laisser entrer la brise marine." [ref=f10e196]
+                  - generic [ref=f10e197]: Jardins de Carthage • 2024 • 3 200 m²
+              - article [ref=f10e198]:
+                - link "Spa & Bien-être — voir le projet" [ref=f10e199] [cursor=pointer]:
+                  - /url: /gallery/spa-et-bien-etre
+                  - generic [ref=f10e200]: Wellness • Interiors • Photography
+                  - heading "Spa & Bien-être" [level=3] [ref=f10e201]
+                  - img "Spa & Bien-être — Hamam, sauna et salle de sport pensés dans la pénombre." [ref=f10e203]
+                  - generic [ref=f10e204]: Jardins de Carthage • 2024 • 64 m²
+        - generic [ref=f10e207]:
+          - heading "LISTES DES APPARTEMENTS ET DUPLEX" [level=2] [ref=f10e208]
+          - generic [ref=f10e209]:
+            - generic [ref=f10e210]:
+              - button "Duplex EN SAVOIR PLUS â–¾" [expanded] [ref=f10e211] [cursor=pointer]:
+                - generic [ref=f10e212]: Duplex
+                - emphasis [ref=f10e213]: EN SAVOIR PLUS
+                - text: â–¾
+              - table [ref=f10e216]:
+                - rowgroup [ref=f10e217]:
+                  - row [ref=f10e218]:
+                    - columnheader "Référence" [ref=f10e219]
+                    - columnheader "Surface" [ref=f10e220]
+                    - columnheader "Chambres" [ref=f10e221]
+                    - columnheader "Piscine" [ref=f10e222]
+                    - columnheader "Plan" [ref=f10e223]
+                - rowgroup [ref=f10e224]:
+                  - row [ref=f10e225]:
+                    - cell "D01" [ref=f10e226]
+                    - cell "146 m²" [ref=f10e227]
+                    - cell "3 + 1" [ref=f10e228]
+                    - cell "Oui" [ref=f10e229]
+                    - cell [ref=f10e231]:
+                      - button "Voir plan" [ref=f10e232] [cursor=pointer]
+                  - row [ref=f10e233]:
+                    - cell "D02" [ref=f10e234]
+                    - cell "152 m²" [ref=f10e235]
+                    - cell "3 + 1" [ref=f10e236]
+                    - cell "Oui" [ref=f10e237]
+                    - cell [ref=f10e239]:
+                      - button "Voir plan" [ref=f10e240] [cursor=pointer]
+                  - row [ref=f10e241]:
+                    - cell "D03" [ref=f10e242]
+                    - cell "158 m²" [ref=f10e243]
+                    - cell "4" [ref=f10e244]
+                    - cell "Oui" [ref=f10e245]
+                    - cell [ref=f10e247]:
+                      - button "Voir plan" [ref=f10e248] [cursor=pointer]
+            - button "Appartements S+3 EN SAVOIR PLUS â–¾" [ref=f10e250] [cursor=pointer]:
+              - generic [ref=f10e251]: Appartements S+3
+              - emphasis [ref=f10e252]: EN SAVOIR PLUS
+              - text: â–¾
+            - button "Appartements S+4.5 EN SAVOIR PLUS â–¾" [ref=f10e254] [cursor=pointer]:
+              - generic [ref=f10e255]: Appartements S+4.5
+              - emphasis [ref=f10e256]: EN SAVOIR PLUS
+              - text: â–¾
+        - generic [ref=f10e261]:
+          - img "PROMED GROUP" [ref=f10e263]
+          - heading "Un promoteur au savoir-faire maîtrisé" [level=2] [ref=f10e264]
+          - paragraph [ref=f10e265]:
+            - text: Derrière
+            - strong [ref=f10e266]: AVA Residences
+            - text: se trouve
+            - strong [ref=f10e267]: PROMED GROUP
+            - text: ", dont le savoir-faire résonne dans toute la Tunisie. Fort d’une expérience éprouvée et d’un engagement sans faille, PROMED GROUP compose des projets immobiliers comme des œuvres intemporelles, en respectant les plus hauts standards de qualité et d’excellence. Chaque réalisation est une mélodie de maîtrise, rigueur et innovation."
+          - img "DHILEL Immobilière" [ref=f10e269]
+          - generic [ref=f10e270]: L’excellence en héritage
+        - generic [ref=f10e273]:
+          - generic [ref=f10e274]:
+            - heading "L’Expérience PROMED GROUP" [level=2] [ref=f10e275]
+            - paragraph [ref=f10e276]: Découvrez pourquoi nos résidents ont choisi l’excellence.
+          - generic [ref=f10e277]:
+            - article [ref=f10e278]:
+              - text: "\""
+              - paragraph [ref=f10e279]: « PROMED GROUP a su allier modernité et confort. L’accompagnement et la qualité de construction sont irréprochables. »
+              - generic [ref=f10e280]:
+                - img "M. Fares" [ref=f10e282]
+                - generic [ref=f10e283]:
+                  - heading "M. Fares" [level=4] [ref=f10e284]
+                  - paragraph [ref=f10e285]: Résident PROMED GROUP
+            - article [ref=f10e286]:
+              - text: "\""
+              - paragraph [ref=f10e287]: « La qualité des finitions et l’attention aux détails offrent un cadre de vie exceptionnel — un véritable havre de paix. »
+              - generic [ref=f10e288]:
+                - img "Mme Amel" [ref=f10e290]
+                - generic [ref=f10e291]:
+                  - heading "Mme Amel" [level=4] [ref=f10e292]
+                  - paragraph [ref=f10e293]: Résidente PROMED GROUP
+        - generic [ref=f10e296]:
+          - generic [ref=f10e297]:
+            - generic [ref=f10e298]: Contact exclusif
+            - heading "Votre résidence d’exception vous attend" [level=2] [ref=f10e299]
+            - paragraph [ref=f10e301]: Contactez notre équipe dédiée pour une visite privée.
+          - generic [ref=f10e302]:
+            - generic [ref=f10e303]:
+              - generic [ref=f10e304]:
+                - generic [ref=f10e305]:
+                  - generic [ref=f10e306]: Nom complet *
+                  - textbox "Nom complet *" [ref=f10e307]
+                - generic [ref=f10e308]:
+                  - generic [ref=f10e309]: Email *
+                  - textbox "Email *" [ref=f10e310]
+              - generic [ref=f10e311]:
+                - generic [ref=f10e312]:
+                  - generic [ref=f10e313]: Téléphone
+                  - textbox "Téléphone" [ref=f10e314]
+                - generic [ref=f10e315]:
+                  - generic [ref=f10e316]: Sujet *
+                  - combobox "Sujet *" [ref=f10e317]:
+                    - option "Sélectionnez un sujet" [selected]
+                    - option "Demande de visite privée"
+                    - option "Demande d’information"
+                    - option "Opportunité d’investissement"
+                    - option "Prise de rendez-vous"
+                    - option "Autre"
+              - generic [ref=f10e318]:
+                - generic [ref=f10e319]: Votre message *
+                - textbox "Votre message *" [ref=f10e320]
+              - button "Réserver ma visite privée" [ref=f10e322] [cursor=pointer]
+              - paragraph [ref=f10e324]:
+                - generic [aria-hidden] [ref=f10e325]: 
+                - text: Données confidentielles, jamais partagées à des tiers.
+            - complementary "Coordonnées" [ref=f10e326]:
+              - generic [ref=f10e327]:
+                - heading "Coordonnées directes" [level=3] [ref=f10e328]
+                - generic [ref=f10e329]:
+                  - generic [aria-hidden] [ref=f10e331]: 
+                  - generic [ref=f10e332]:
+                    - heading "Email" [level=4] [ref=f10e333]
+                    - paragraph [ref=f10e334]: commercial@promed.tn
+                - generic [ref=f10e335]:
+                  - generic [aria-hidden] [ref=f10e337]: 
+                  - generic [ref=f10e338]:
+                    - heading "Téléphone" [level=4] [ref=f10e339]
+                    - paragraph [ref=f10e340]: +216 92 700 100
+                - generic [ref=f10e341]:
+                  - generic [aria-hidden] [ref=f10e343]: 
+                  - generic [ref=f10e344]:
+                    - heading "Adresse" [level=4] [ref=f10e345]
+                    - paragraph [ref=f10e346]: Rue du lac Chad, Zen Building — 1053 Les Berges du Lac
+                - generic [ref=f10e347]:
+                  - generic [aria-hidden] [ref=f10e349]: 
+                  - generic [ref=f10e350]:
+                    - heading "Disponibilité" [level=4] [ref=f10e351]
+                    - paragraph [ref=f10e352]: "Lun–Ven : 8h–18hSamedi : 9h–14h"
+      - generic [ref=f10e354]:
+        - generic [ref=f10e355]:
+          - generic [ref=f10e356]:
+            - img "AVA Tunis" [ref=f10e357]
+            - paragraph [ref=f10e358]: Redéfinir l’art de vivre en Tunisie avec des résidences d’exception qui allient luxe, confort et investissement intelligent.
+            - generic "Réseaux sociaux" [ref=f10e359]:
+              - link "Facebook" [ref=f10e360] [cursor=pointer]:
+                - /url: https://www.facebook.com/mzpromed/
+                - generic [aria-hidden] [ref=f10e361]: 
+              - link "Instagram" [ref=f10e363] [cursor=pointer]:
+                - /url: https://www.instagram.com/promed_immobiliere/
+                - generic [aria-hidden] [ref=f10e364]: 
+              - link "LinkedIn" [ref=f10e366] [cursor=pointer]:
+                - /url: https://www.linkedin.com/company/promed-tunisie/
+                - generic [aria-hidden] [ref=f10e367]: 
+          - generic [ref=f10e369]:
+            - heading "Découvrir" [level=3] [ref=f10e370]
+            - list [ref=f10e371]:
+              - listitem [ref=f10e372]:
+                - link " Accueil" [ref=f10e373] [cursor=pointer]:
+                  - /url: "#hero"
+                  - generic [ref=f10e374]: 
+                  - text: Accueil
+              - listitem [ref=f10e375]:
+                - link " Le concept" [ref=f10e376] [cursor=pointer]:
+                  - /url: "#features"
+                  - generic [ref=f10e377]: 
+                  - text: Le concept
+              - listitem [ref=f10e378]:
+                - link " Galerie" [ref=f10e379] [cursor=pointer]:
+                  - /url: "#gallery"
+                  - generic [ref=f10e380]: 
+                  - text: Galerie
+              - listitem [ref=f10e381]:
+                - link " Témoignages" [ref=f10e382] [cursor=pointer]:
+                  - /url: "#testimonials"
+                  - generic [ref=f10e383]: 
+                  - text: Témoignages
+              - listitem [ref=f10e384]:
+                - link " Contact" [ref=f10e385] [cursor=pointer]:
+                  - /url: "#contact"
+                  - generic [ref=f10e386]: 
+                  - text: Contact
+          - generic [ref=f10e387]:
+            - heading "Contact" [level=3] [ref=f10e388]
+            - list [ref=f10e389]:
+              - listitem [ref=f10e390]:
+                - generic [ref=f10e391]: 
+                - text: Rue du lac Chad, Zen Building — Les Berges du Lac
+              - listitem [ref=f10e392]:
+                - link " +216 92 700 100" [ref=f10e393] [cursor=pointer]:
+                  - /url: tel:+21692700100
+                  - generic [ref=f10e394]: 
+                  - text: +216 92 700 100
+              - listitem [ref=f10e395]:
+                - link " commercial@promed.tn" [ref=f10e396] [cursor=pointer]:
+                  - /url: mailto:commercial@promed.tn
+                  - generic [ref=f10e397]: 
+                  - text: commercial@promed.tn
+          - generic [ref=f10e398]:
+            - heading "Visite privée" [level=3] [ref=f10e399]
+            - paragraph [ref=f10e400]: Réservez votre visite exclusive avec notre directeur de projet.
+            - link "Demander un rendez-vous" [ref=f10e401] [cursor=pointer]:
+              - /url: "#contact"
+        - paragraph [ref=f10e403]: © 2026 AVA. Tous droits réservés. | Conçu pour les investisseurs exigeants
+  - button "Open Next.js Dev Tools" [ref=f10e409] [cursor=pointer]
+  - alert [ref=f10e413]
