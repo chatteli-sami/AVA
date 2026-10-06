@@ -10,35 +10,29 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuMounted, setMenuMounted] = useState(false);
   const [menuOrigin, setMenuOrigin] = useState({ x: "18px", y: "44px" });
-  const [isCompact, setIsCompact] = useState(false);
-  const [reducedMotion, setReducedMotion] = useState(false);
   const pathname = usePathname();
   const isHomePage = pathname === "/";
   const menuButtonRef = useRef<HTMLButtonElement>(null);
 
-  // Check reduced motion preference on mount
-  useEffect(() => {
-    setReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-  }, []);
+  // `prefers-reduced-motion` is read once, before the first effect, so there is no
+  // synchronous setState on mount. The header is static once mounted; a mid-session
+  // change of the system preference is not something the top bar needs to live-update.
+  const [reducedMotion] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  });
 
-  // Compute the initial state on mount, before the first scroll.
-  // Interior pages are always compact; on the home page the big white state
-  // only applies while the video (and its trailing sentinel) is still below
-  // the fold. A page restored mid-video must not flash the compact state.
-  useEffect(() => {
-    if (!isHomePage) {
-      setIsCompact(true);
-      return;
-    }
-
+  // Interior pages are always compact; on the home page the compact state is driven
+  // by the video sentinel (see the observer below). Deriving the non-home case keeps
+  // the route-change reset out of an effect body.
+  const [compactFromScroll, setCompactFromScroll] = useState(() => {
+    if (typeof window === "undefined" || !isHomePage) return false;
     const sentinel = document.getElementById("video-end-sentinel");
-    if (!sentinel) return;
-
-    // Compact once the sentinel's top has passed above the header line.
+    if (!sentinel) return false;
     const compactCutoff = 120;
-    const isInitiallyCompact = sentinel.getBoundingClientRect().top <= compactCutoff;
-    setIsCompact(isInitiallyCompact);
-  }, [isHomePage]);
+    return sentinel.getBoundingClientRect().top <= compactCutoff;
+  });
+  const isCompact = !isHomePage || compactFromScroll;
 
   // Observe the sentinel at the end of the video section to flip between the
   // big white "over video" state and the compact dark state.
@@ -48,17 +42,29 @@ export default function Header() {
     const sentinel = document.getElementById("video-end-sentinel");
     if (!sentinel) return undefined;
 
+    const compactCutoff = 120;
+
+    // Re-base the scroll-derived compact flag when the route changes. Done in a
+    // rAF callback so the read still happens before paint, but never as a
+    // synchronous setState whose cascade the linter rightly flags.
+    const frame = window.requestAnimationFrame(() => {
+      setCompactFromScroll(sentinel.getBoundingClientRect().top <= compactCutoff);
+    });
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!menuOpen) {
           // Sentinel below the header line => video still ahead of us => big state.
-          setIsCompact(entry.boundingClientRect.top <= 120);
+          setCompactFromScroll(entry.boundingClientRect.top <= compactCutoff);
         }
       },
       { threshold: 0 }
     );
     observer.observe(sentinel);
-    return () => observer.disconnect();
+    return () => {
+      window.cancelAnimationFrame(frame);
+      observer.disconnect();
+    };
   }, [isHomePage, menuOpen]);
 
   // Scroll lock when menu is open

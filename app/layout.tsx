@@ -38,6 +38,16 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var d=document.documentElement;var skip=(window.matchMedia('(prefers-reduced-motion: reduce)').matches)||(function(){try{return sessionStorage.getItem('galleryReturnPending')==='true'}catch(e){return false}}());if(skip){d.dataset.intro='done';d.style.overflow=''}else{d.removeAttribute('data-intro')}})();`,
+          }}
+        />
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `#intro-overlay{position:fixed;inset:0;z-index:9999;background:#F0F1FA;overflow:hidden;opacity:1;visibility:visible;pointer-events:auto}#intro-overlay .active{opacity:1;visibility:visible}html[data-intro] #intro-overlay{opacity:0;visibility:hidden;pointer-events:none;transition:opacity 1000ms ease}html[data-intro="done"] #intro-overlay{transition:none}`,
+          }}
+        />
       </head>
       <body suppressHydrationWarning>
         <ScrollReset />

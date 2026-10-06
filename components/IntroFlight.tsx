@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "../styles/intro-flight.module.css";
 import { lockPageScroll } from "../lib/scroll-lock";
+import { isGalleryReturnPending } from "../lib/gallery-scroll";
 import { INTRO_SKIP_LABEL, INTRO_STATUS_LABEL, SITE_CONTENT_ID } from "./intro-flight.constants";
 
 type Point = { x: number; y: number };
@@ -268,6 +269,10 @@ export default function IntroFlight() {
     stopFlight();
     setIsActive(false);
     setIsComplete(true);
+    // Hand visibility control back to the inline critical CSS: any `data-intro`
+    // value hides the cover. This runs in the same tick as unmount of the inert
+    // effect, so the page is never stranded covered.
+    document.documentElement.dataset.intro = "complete";
   }, [stopFlight]);
 
   const refreshGeometry = useCallback(() => {
@@ -359,8 +364,23 @@ export default function IntroFlight() {
 
     const applyMotionPreference = () => {
       reducedMotionRef.current = motionQuery.matches;
-      if (motionQuery.matches) finishIntro();
-      else playIntro();
+      if (motionQuery.matches) {
+        finishIntro();
+        return;
+      }
+
+      // A return from a project page reuses the same document on the way out, but
+      // if a phone discarded the tab the back-navigation reloads this document.
+      // That reload would re-evaluate `introPlayed`, so the flag alone cannot tell
+      // the two cases apart. The gallery return record is set by the card that was
+      // clicked, so its presence is the signal that this load is an arrival back,
+      // not a fresh open — play no intro over it.
+      if (isGalleryReturnPending()) {
+        finishIntro();
+        return;
+      }
+
+      playIntro();
     };
 
     const handleViewportChange = () => {
@@ -414,15 +434,12 @@ export default function IntroFlight() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [finishIntro, isActive]);
 
-  const overlayClassName = [
-    styles.intro,
-    isActive ? styles.active : isComplete ? styles.done : "",
-  ]
-    .filter(Boolean)
-    .join(" ");
-
   return (
-    <div className={overlayClassName}>
+    <div
+      id="intro-overlay"
+      className={isActive ? styles.active : ""}
+      aria-hidden={isComplete}
+    >
       <div className={styles.ava} aria-hidden="true">AVA</div>
       <svg className={styles.trail} aria-hidden="true">
         <path ref={trailRef} />
