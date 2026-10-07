@@ -12,6 +12,13 @@
   letter-spacing: -0.02em;
 }
 
+:global(html[data-theme="dark"]) .shell {
+  --w-bg: #1c1a17;
+  --w-ink: #f3ead6;
+  --w-muted: #b9ac93;
+  --w-accent: #d09a60;
+}
+
 /* ---------------------------------------------------------------- header */
 
 .header {
@@ -237,7 +244,7 @@
 }
 
 .detailFeatures li::before {
-  content: "â€” ";
+  content: "\2014 ";
   opacity: 0.5;
 }
 

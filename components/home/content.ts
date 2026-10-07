@@ -2,7 +2,7 @@ export const navItems = [
   { label: "Accueil", href: "#hero" },
   { label: "La résidence", href: "#features" },
   { label: "Galerie", href: "#gallery" },
-  { label: "Appartements", href: "#inventaire" },
+  { label: "Inventaire", href: "/inventaire" },
   { label: "Témoignages", href: "#testimonials" },
   { label: "Contact", href: "#contact" },
 ];
@@ -35,25 +35,25 @@ export const inventory = {
   duplex: {
     label: "Duplex",
     rows: [
-      { reference: "D01", surface: "146 m²", bedrooms: "3 + 1", pool: "Oui", plan: "Voir plan", planHref: "/docs/plans%20interactifs/3eme%20etage/appart3_1.html" },
-      { reference: "D02", surface: "152 m²", bedrooms: "3 + 1", pool: "Oui", plan: "Voir plan", planHref: "/docs/plans%20interactifs/3eme%20etage/appart3_2.html" },
-      { reference: "D03", surface: "158 m²", bedrooms: "4", pool: "Oui", plan: "Voir plan", planHref: "/docs/plans%20interactifs/3eme%20etage/appart3_3.html" },
+      { reference: "D01", surface: "146 m²", bedrooms: "3 + 1", pool: "Oui", plan: "Voir plan", planHref: "/inventaire?ref=D01" },
+      { reference: "D02", surface: "152 m²", bedrooms: "3 + 1", pool: "Oui", plan: "Voir plan", planHref: "/inventaire?ref=D02" },
+      { reference: "D03", surface: "158 m²", bedrooms: "4", pool: "Oui", plan: "Voir plan", planHref: "/inventaire?ref=D03" },
     ],
   },
   s3: {
     label: "Appartements S+3",
     rows: [
-      { reference: "S3-01", surface: "98 m²", bedrooms: "3", pool: "Non", plan: "Voir plan", planHref: "/docs/plans%20interactifs/1ere%20etage/appart1_1.html" },
-      { reference: "S3-02", surface: "102 m²", bedrooms: "3", pool: "Oui", plan: "Voir plan", planHref: "/docs/plans%20interactifs/1ere%20etage/appart1_2.html" },
-      { reference: "S3-03", surface: "110 m²", bedrooms: "3", pool: "Oui", plan: "Voir plan", planHref: "/docs/plans%20interactifs/1ere%20etage/appart1_3.html" },
+      { reference: "S3-01", surface: "98 m²", bedrooms: "3", pool: "Non", plan: "Voir plan", planHref: "/inventaire?ref=S3-01" },
+      { reference: "S3-02", surface: "102 m²", bedrooms: "3", pool: "Oui", plan: "Voir plan", planHref: "/inventaire?ref=S3-02" },
+      { reference: "S3-03", surface: "110 m²", bedrooms: "3", pool: "Oui", plan: "Voir plan", planHref: "/inventaire?ref=S3-03" },
     ],
   },
   s45: {
     label: "Appartements S+4.5",
     rows: [
-      { reference: "S45-01", surface: "118 m²", bedrooms: "4", pool: "Oui", plan: "Voir plan", planHref: "/docs/plans%20interactifs/2eme%20etage/appart2_1.html" },
-      { reference: "S45-02", surface: "124 m²", bedrooms: "4", pool: "Oui", plan: "Voir plan", planHref: "/docs/plans%20interactifs/2eme%20etage/appart2_2.html" },
-      { reference: "S45-03", surface: "132 m²", bedrooms: "4 + 1", pool: "Oui", plan: "Voir plan", planHref: "/docs/plans%20interactifs/2eme%20etage/appart2_3.html" },
+      { reference: "S45-01", surface: "118 m²", bedrooms: "4", pool: "Oui", plan: "Voir plan", planHref: "/inventaire?ref=S45-01" },
+      { reference: "S45-02", surface: "124 m²", bedrooms: "4", pool: "Oui", plan: "Voir plan", planHref: "/inventaire?ref=S45-02" },
+      { reference: "S45-03", surface: "132 m²", bedrooms: "4 + 1", pool: "Oui", plan: "Voir plan", planHref: "/inventaire?ref=S45-03" },
     ],
   },
 } as const;

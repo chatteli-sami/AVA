@@ -2,7 +2,7 @@ import ContactSection from "../../components/home/ContactSection";
 import FeaturesSection from "../../components/home/FeaturesSection";
 import GallerySection from "../../components/home/GallerySection";
 import HeroSection from "../../components/home/HeroSection";
-import InventorySection from "../../components/home/InventorySection";
+import InventoryHashRedirect from "../../components/InventoryHashRedirect";
 import LocationSection from "../../components/home/LocationSection";
 import PromoterSection from "../../components/home/PromoterSection";
 import ScrollStorySection from "../../components/home/ScrollStorySection";
@@ -13,6 +13,7 @@ import Section from "../../components/Section";
 export default function Home() {
   return (
     <>
+      <InventoryHashRedirect />
       <main>
         <ScrollStorySection />
         <Section threshold={0.12} rootMargin="0px 0px -72px 0px" once>
@@ -27,9 +28,6 @@ export default function Home() {
         {/* No <Section> wrapper: the gallery animates its own cards on scroll,
             and a parent with `variants` would propagate down and override it. */}
         <GallerySection />
-        <Section threshold={0.12} once>
-          <InventorySection />
-        </Section>
         <Section threshold={0.12} once>
           <PromoterSection />
         </Section>

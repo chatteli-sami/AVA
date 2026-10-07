@@ -13,16 +13,13 @@
   --fs-fs-gold-light: #e0b883;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* ---- dark theme ---- */
-    --fs-fs-bg: #130f0b;
-    --fs-fs-card: #1f1812;
-    --fs-fs-text: #f3eadc;
-    --fs-fs-muted: #b8a892;
-    --fs-fs-gold: #c8955a;
-    --fs-fs-gold-light: #d4b89e;
-  }
+:root[data-theme="dark"] {
+  --fs-fs-bg: #130f0b;
+  --fs-fs-card: #1f1812;
+  --fs-fs-text: #f3eadc;
+  --fs-fs-muted: #b8a892;
+  --fs-fs-gold: #c8955a;
+  --fs-fs-gold-light: #d4b89e;
 }
 
 /* ------------------------------------------------------------------- section */
@@ -40,15 +37,13 @@
   padding: clamp(64px, 10vh, 120px) 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  .section {
-    --fs-fs-bg: #130f0b;
-    --fs-fs-card: #1f1812;
-    --fs-fs-text: #f3eadc;
-    --fs-fs-muted: #b8a892;
-    --fs-fs-gold: #c8955a;
-    --fs-fs-gold-light: #d4b89e;
-  }
+:root[data-theme="dark"] .section {
+  --fs-fs-bg: #130f0b;
+  --fs-fs-card: #1f1812;
+  --fs-fs-text: #f3eadc;
+  --fs-fs-muted: #b8a892;
+  --fs-fs-gold: #c8955a;
+  --fs-fs-gold-light: #d4b89e;
 }
 
 .container {

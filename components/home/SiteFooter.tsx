@@ -18,7 +18,8 @@ export default function SiteFooter() {
             <ul>
               <li><a href="#hero"><i className="fas fa-chevron-right"></i> Accueil</a></li>
               <li><a href="#features"><i className="fas fa-chevron-right"></i> Le concept</a></li>
-              <li><a href="#gallery"><i className="fas fa-chevron-right"></i> Galerie</a></li>
+<li><a href="#gallery"><i className="fas fa-chevron-right"></i> Galerie</a></li>
+              <li><a href="/inventaire"><i className="fas fa-chevron-right"></i> Inventaire</a></li>
               <li><a href="#testimonials"><i className="fas fa-chevron-right"></i> Témoignages</a></li>
               <li><a href="#contact"><i className="fas fa-chevron-right"></i> Contact</a></li>
             </ul>

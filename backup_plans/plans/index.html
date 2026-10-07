@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Plans AVA - Sélection</title>
+    <style>
+      :root {
+        --bg: #f5efe7;
+        --panel: #fffdfb;
+        --ink: #1d1d1d;
+        --muted: #5d5d5d;
+        --gold: #b2804b;
+        --gold-soft: rgba(178, 128, 75, 0.14);
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(180deg, var(--bg), #f1eadf);
+        color: var(--ink);
+      }
+
+      .wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 56px 24px 72px;
+      }
+
+      .hero {
+        text-align: center;
+        margin-bottom: 32px;
+      }
+
+      .hero img {
+        width: 180px;
+        height: auto;
+        margin: 0 auto 14px;
+      }
+
+      .hero h1 {
+        margin: 0;
+        font-size: clamp(2rem, 5vw, 3.2rem);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .hero p {
+        margin: 12px auto 0;
+        max-width: 650px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 22px;
+      }
+
+      .card {
+        background: var(--panel);
+        border: 1px solid rgba(178, 128, 75, 0.25);
+        border-radius: 18px;
+        padding: 22px 18px;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.04);
+      }
+
+      .card h2 {
+        margin: 0 0 10px;
+        font-size: 1.5rem;
+      }
+
+      .card p {
+        margin: 0 0 18px;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+
+      .card a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 18px;
+        border-radius: 999px;
+        background: var(--gold);
+        color: #fff;
+        text-decoration: none;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .card a.secondary {
+        background: transparent;
+        border: 1px solid var(--gold);
+        color: var(--ink);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="hero">
+        <img src="../logoava.avif" alt="Logo AVA" />
+        <h1>Plans AVA</h1>
+        <p>
+          Sélectionnez le plan interactif ou le document PDF correspondant à la typologie recherchée.
+        </p>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <h2>Plan interactif</h2>
+          <p>Navigation cliquable de la façade, des étages et des logements AVA.</p>
+          <a href="../plans%20interactifs/">Ouvrir</a>
+        </article>
+
+        <article class="card">
+          <h2>S+3</h2>
+          <p>Appartement avec finition premium et distribution optimisée pour un confort quotidien.</p>
+          <a href="../Plans-AVA-S3.pdf" target="_blank" rel="noreferrer">Voir PDF</a>
+        </article>
+
+        <article class="card">
+          <h2>S+4.5</h2>
+          <p>Typologie haut standing avec volumes généreux et surfaces pensées pour un cadre de vie luxe.</p>
+          <a href="../Plans-AVA-S45.pdf" target="_blank" rel="noreferrer">Voir PDF</a>
+        </article>
+
+        <article class="card">
+          <h2>Duplex</h2>
+          <p>Excellence et polyvalence avec des piscines privatives et une qualité d’habitat premium.</p>
+          <a href="../Plans-AVA-Duplex.pdf" target="_blank" rel="noreferrer">Voir PDF</a>
+        </article>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,9 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState, type AnimationEvent, type CSSProperties } from "react";
+import Image from "next/image";
+import { useCallback, useEffect, useRef, useState, type AnimationEvent, type CSSProperties } from "react";
 import { usePathname } from "next/navigation";
 import { createPortal } from "react-dom";
 import ScrollLink from "../ScrollLink";
+import ThemeToggle from "../ThemeToggle";
+import { lockPageScroll } from "../../lib/scroll-lock";
 import { navItems } from "./content";
 
 export default function Header() {
@@ -33,6 +36,12 @@ export default function Header() {
     return sentinel.getBoundingClientRect().top <= compactCutoff;
   });
   const isCompact = !isHomePage || compactFromScroll;
+  const closeMenu = useCallback(() => {
+    setMenuOpen(false);
+    if (reducedMotion) {
+      setMenuMounted(false);
+    }
+  }, [reducedMotion]);
 
   // Observe the sentinel at the end of the video section to flip between the
   // big white "over video" state and the compact dark state.
@@ -71,12 +80,7 @@ export default function Header() {
   useEffect(() => {
     if (!menuMounted) return undefined;
 
-    const previousOverflow = document.body.style.overflow;
-    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-    if (scrollbarWidth > 0) {
-      document.body.style.paddingRight = `${scrollbarWidth}px`;
-    }
-    document.body.style.overflow = "hidden";
+    const releaseScroll = lockPageScroll();
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -86,11 +90,10 @@ export default function Header() {
 
     document.addEventListener("keydown", handleKeyDown);
     return () => {
-      document.body.style.paddingRight = "";
-      document.body.style.overflow = previousOverflow;
+      releaseScroll();
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [menuMounted]);
+  }, [closeMenu, menuMounted]);
 
   // Focus trap - return focus to menu button when menu closes
   useEffect(() => {
@@ -98,13 +101,6 @@ export default function Header() {
       menuButtonRef.current?.focus();
     }
   }, [menuOpen, menuMounted]);
-
-  function closeMenu() {
-    setMenuOpen(false);
-    if (reducedMotion) {
-      setMenuMounted(false);
-    }
-  }
 
   function closeMenuImmediately() {
     setMenuOpen(false);
@@ -155,7 +151,14 @@ export default function Header() {
             </span>
           </button>
           <div className={`logo ${isCompact ? "logo--compact" : ""}`}>
-            <img src="/images/logoava.avif" alt="AVA Tunis" width={540} height={180} loading="eager" fetchPriority="high" />
+            <Image
+              src="/images/logoava.avif"
+              alt="AVA Tunis"
+              width={540}
+              height={180}
+              sizes="(max-width: 768px) 220px, 300px"
+              priority
+            />
           </div>
           <div className="header-right" />
         </div>
@@ -201,6 +204,10 @@ export default function Header() {
             <a className="fullscreen-menu-email" href="mailto:commercial@promed.tn">
               commercial@promed.tn
             </a>
+            <div className="fullscreen-menu-appearance">
+              <span>Apparence</span>
+              <ThemeToggle />
+            </div>
           </nav>
         </div>,
         document.body

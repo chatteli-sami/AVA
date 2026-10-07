@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter_Tight, Montserrat } from "next/font/google";
 import CoverTransitionLayer from "../components/CoverTransitionLayer";
 import ScrollReset from "../components/ScrollReset";
+import ScrollStateRestore from "../components/ScrollStateRestore";
 import GalleryReturnWatcher from "../components/GalleryReturnWatcher";
 import "./globals.css";
 
@@ -30,8 +31,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="fr" className={`${cormorant.variable} ${montserrat.variable} ${interTight.variable}`}>
+    <html lang="fr" className={`${cormorant.variable} ${montserrat.variable} ${interTight.variable}`} suppressHydrationWarning>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var t=null;try{t=localStorage.getItem('ava-theme')}catch(e){}if(t!=='light'&&t!=='dark')t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t})()`,
+          }}
+        />
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -45,12 +51,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         />
         <style
           dangerouslySetInnerHTML={{
-            __html: `#intro-overlay{position:fixed;inset:0;z-index:9999;background:#F0F1FA;overflow:hidden;opacity:1;visibility:visible;pointer-events:auto}#intro-overlay .active{opacity:1;visibility:visible}html[data-intro] #intro-overlay{opacity:0;visibility:hidden;pointer-events:none;transition:opacity 1000ms ease}html[data-intro="done"] #intro-overlay{transition:none}`,
+            __html: `#intro-overlay{position:fixed;inset:0;z-index:9999;background:var(--beige-light,#F0F1FA);overflow:hidden;opacity:1;visibility:visible;pointer-events:auto}#intro-overlay .active{opacity:1;visibility:visible}html[data-intro] #intro-overlay{opacity:0;visibility:hidden;pointer-events:none;transition:opacity 1000ms ease}html[data-intro="done"] #intro-overlay{transition:none}`,
           }}
         />
       </head>
       <body suppressHydrationWarning>
         <ScrollReset />
+        <ScrollStateRestore />
         <GalleryReturnWatcher />
         {children}
         <CoverTransitionLayer />

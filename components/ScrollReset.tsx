@@ -3,6 +3,7 @@
 import { useEffect, useLayoutEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { isGalleryReturnPending } from "../lib/gallery-scroll";
+import { peekInventoryScrollState } from "../lib/inventory-scroll";
 
 const useIsomorphicLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect;
 
@@ -37,6 +38,15 @@ export default function ScrollReset() {
     // A deep link or a reload still deserves a clean top, but never fight the
     // gallery's own restore on the way back from a project.
     if (isFirstRender.current && isGalleryReturnPending()) {
+      isFirstRender.current = false;
+      return;
+    }
+
+    // The inventory list remembers where the visitor was, so a Back button or a
+    // swipe-back should land there instead of at the top. ScrollStateRestore
+    // re-applies the offset after the page has mounted, so this only skips the
+    // reset when a record is actually on file.
+    if (isFirstRender.current && peekInventoryScrollState()) {
       isFirstRender.current = false;
       return;
     }

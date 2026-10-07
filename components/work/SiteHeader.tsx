@@ -5,6 +5,7 @@ import { useState, type CSSProperties } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import { springSoft, transition } from "../../lib/animations";
+import ThemeToggle from "../ThemeToggle";
 import styles from "../../styles/work.module.css";
 
 interface SiteHeaderProps {
@@ -34,6 +35,7 @@ export default function SiteHeader({ accent }: SiteHeaderProps) {
       </Link>
 
       <nav className={styles.pills} aria-label="Navigation principale">
+        <ThemeToggle />
         <a className={styles.iconPill} href="mailto:commercial@promed.tn" aria-label="Écrire au studio">
           <i className="fas fa-envelope" aria-hidden="true"></i>
         </a>
