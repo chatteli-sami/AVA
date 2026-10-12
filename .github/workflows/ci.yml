@@ -36,4 +36,4 @@ jobs:
         run: npm test
 
       - name: Check plans
-        run: npm run check:plans
+        run: npm run check:plans # fix that 
