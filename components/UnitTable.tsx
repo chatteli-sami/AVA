@@ -31,6 +31,11 @@ function ChevronIcon() {
   );
 }
 
+function typeLabel(type: Unit["type"]): string {
+  if (type === "duplex") return "Duplex";
+  return type === "s3" ? "S+3" : "S+4.5";
+}
+
 export default function UnitTable({ units, onOpen }: UnitTableProps) {
   return (
     <div className={styles.invTableWrap}>
@@ -39,6 +44,7 @@ export default function UnitTable({ units, onOpen }: UnitTableProps) {
         <thead>
           <tr>
             <th scope="col">Référence</th>
+            <th scope="col">Type</th>
             <th scope="col">Surface</th>
             <th scope="col">Chambres</th>
             <th scope="col">Piscine</th>
@@ -51,6 +57,7 @@ export default function UnitTable({ units, onOpen }: UnitTableProps) {
               <td className={styles.invStickyCell}>
                 <span className={styles.invRef}>{unit.ref}</span>
               </td>
+              <td><span className={styles.invCardType}>{typeLabel(unit.type)}</span></td>
               <td>
                 <span className={styles.invSurface}>
                   {unit.surface} <small>m²</small>

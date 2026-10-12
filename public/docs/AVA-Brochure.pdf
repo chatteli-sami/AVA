@@ -1,3 +1,49 @@
-AVA Residences brochure placeholder
-
-This file is generated for the AVA pack page and can be replaced with the final PDF asset at any time.
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /PageLayout /SinglePage /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 5 0 R /Resources << /Font << /F1 6 0 R /F2 7 0 R >> >> >>
+endobj
+4 0 obj
+<< /Type /Image /Subtype /Image /Width 120 /Height 120 /ColorSpace /DeviceRGB /BitsPerComponent 8 /Length 5000 >>
+stream
+endstream
+endobj
+5 0 obj
+<< /Length 240 >>
+stream
+BT /F1 36 Tf 60 700 Td (AVA Residences) Tj ET
+BT /F2 18 Tf 60 660 Td (Brochure — Projet de luxe aux Jardins) Tj ET
+BT /F2 14 Tf 60 620 Td (1. Vue d'ensemble du site) Tj ET
+BT /F2 14 Tf 60 590 Td (2. Plans des typologies : Duplex S+3 S+4.5) Tj ET
+BT /F2 14 Tf 60 560 Td (3. Prestations et localisation) Tj ET
+BT /F2 12 Tf 60 520 Td (20 unités haut standing — Piscines privatives) Tj ET
+BT /F2 12 Tf 60 500 Td (Contact : +216 92 700 100 — commercial@promed.tn) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+7 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000062 00000 n 
+0000000119 00000 n 
+0000000280 00000 n 
+0000000780 00000 n 
+0000000380 00000 n 
+0000000540 00000 n 
+0000000606 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+766
+%%EOF

@@ -1,3 +1,52 @@
-AVA Residences plan S+3 placeholder
-
-This file is generated for the AVA pack page and can be replaced with the final PDF asset at any time.
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /PageLayout /SinglePage /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 5 0 R /Resources << /Font << /F1 6 0 R /F2 7 0 R >> >> >>
+endobj
+5 0 obj
+<< /Length 200 >>
+stream
+BT /F1 32 Tf 60 700 Td (Plans AVA — Typologie S+3) Tj ET
+BT /F2 16 Tf 60 650 Td (Appartements S+3 — Étages 1 & 3) Tj ET
+BT /F2 14 Tf 60 610 Tj ET
+BT /F2 14 Tf 60 580 Td (Surface : 98–110 m²) Tj ET
+BT /F2 14 Tf 60 550 Td (Chambres : 3) Tj ET
+BT /F2 14 Tf 60 520 Td (Piscine : selon lot) Tj ET
+BT /F2 14 Tf 60 490 Td (Unités : 8 au total) Tj ET
+BT /F2 12 Tf 60 450 Td (S3-01 : 98 m² — Étages 1) Tj ET
+BT /F2 12 Tf 60 430 Td (S3-02 : 102 m² — Étages 1) Tj ET
+BT /F2 12 Tf 60 410 Td (S3-03 : 110 m² — Étages 1) Tj ET
+BT /F2 12 Tf 60 390 Td (S3-04 : 103 m² — Étages 1) Tj ET
+BT /F2 12 Tf 60 370 Td (S3-05 : 105 m² — Étages 3) Tj ET
+BT /F2 12 Tf 60 350 Td (S3-06 : 108 m² — Étages 3) Tj ET
+BT /F2 12 Tf 60 330 Td (S3-07 : 102 m² — Étages 3) Tj ET
+BT /F2 12 Tf 60 310 Td (S3-08 : 110 m² — Étages 3) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+7 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000062 00000 n 
+0000000119 00000 n 
+0000000280 00000 n 
+0000000440 00000 n 
+0000000540 00000 n 
+0000000606 00000 n 
+0000000672 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+732
+%%EOF

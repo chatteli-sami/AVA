@@ -29,12 +29,11 @@ export default function ScrollStateRestore() {
     // has not switched yet and the wrong list would be visible at the offset.
     let frame = 0;
     const apply = () => {
-      window.scrollTo({ top: state.scrollY, behavior: "instant" });
-      window.history.replaceState(
-        { ...(window.history.state ?? {}), inventoryScroll: state.scrollY },
-        "",
-        `?type=${encodeURIComponent(state.type)}`,
-      );
+       window.scrollTo({ top: state.scrollY, behavior: "instant" });
+       window.history.replaceState(
+         { ...(window.history.state ?? {}), inventoryScroll: state.scrollY },
+         "",
+       );
     };
 
     frame = window.requestAnimationFrame(() => {
@@ -54,12 +53,11 @@ export default function ScrollStateRestore() {
       const state = peekInventoryScrollState();
       if (!state) return;
 
-      window.scrollTo({ top: state.scrollY, behavior: "instant" });
-      window.history.replaceState(
-        { ...(window.history.state ?? {}), inventoryScroll: state.scrollY },
-        "",
-        `?type=${encodeURIComponent(state.type)}`,
-      );
+       window.scrollTo({ top: state.scrollY, behavior: "instant" });
+       window.history.replaceState(
+         { ...(window.history.state ?? {}), inventoryScroll: state.scrollY },
+         "",
+       );
     };
 
     window.addEventListener("pageshow", handlePageShow);

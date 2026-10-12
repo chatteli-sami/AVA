@@ -6,7 +6,7 @@ import { useState } from "react";
 const quickLinks = [
   { label: "WhatsApp", href: "https://wa.me/21692700100", icon: "🟢" },
   { label: "Appeler", href: "tel:+21692700100", icon: "📞" },
-  { label: "Brochure", href: "/docs/AVA-Brochure.pdf", icon: "⬇️" },
+  { label: "Brochure", href: "/docs/AVA-Brochure.pdf", icon: "⬇️", download: "AVA-Brochure.pdf" },
   { label: "Plans interactifs", href: "/plans", icon: "🗺️" },
 ];
 
@@ -14,6 +14,53 @@ const highlights = [
   "20 unités haut standing",
   "S+3 • S+4.5 • Duplex",
   "8 duplex",
+];
+
+const sectorComparison = [
+  {
+    floor: "RDC",
+    label: "Rez-de-chaussée",
+    type: "Duplex",
+    units: 8,
+    surface: "146–188 m²",
+    bedrooms: "3 + 1 / 4",
+    pool: "Piscine privative",
+    icon: "🏠",
+    urlValue: "rdc",
+  },
+  {
+    floor: "1er étage",
+    label: "S+3",
+    type: "S+3",
+    units: 4,
+    surface: "98–110 m²",
+    bedrooms: "3",
+    pool: "Piscine privative",
+    icon: "🌊",
+    urlValue: "1",
+  },
+  {
+    floor: "2e étage",
+    label: "S+4.5",
+    type: "S+4.5",
+    units: 4,
+    surface: "118–132 m²",
+    bedrooms: "4 / 4 + 1",
+    pool: "Sans piscine",
+    icon: "🌅",
+    urlValue: "2",
+  },
+  {
+    floor: "3e étage",
+    label: "S+3",
+    type: "S+3",
+    units: 4,
+    surface: "98–110 m²",
+    bedrooms: "3",
+    pool: "Piscine privative",
+    icon: "🌊",
+    urlValue: "3",
+  },
 ];
 
 const points = [
@@ -24,6 +71,7 @@ const points = [
 ];
 
 const packMessage =
+
   "AVA Residences — projet d'exception aux Jardins de Carthage. Visites privées sur rendez-vous. Contact: +216 92 700 100";
 
 export default function PackPage() {
@@ -106,6 +154,7 @@ export default function PackPage() {
                   href={item.href}
                   target={item.href.startsWith("http") ? "_blank" : undefined}
                   rel={item.href.startsWith("http") ? "noreferrer" : undefined}
+                  download={item.download}
                 >
                   <span className="cardbtn__ico" aria-hidden="true">{item.icon}</span>
                   <span className="cardbtn__txt">
@@ -146,9 +195,10 @@ export default function PackPage() {
                 <h3>S+3</h3>
                 <span className="tag">Piscine selon lot</span>
               </div>
-              <p className="muted">Plan PDF prêt à partager + aperçu rapide.</p>
+              <p className="muted">Plan PDF prêt à partager + plan interactif.</p>
               <div className="box__actions">
-                <a className="btn btn--ghost" href="/docs/Plans-AVA-S3.pdf" target="_blank" rel="noreferrer">Voir PDF</a>
+                <a className="btn btn--ghost" href="/docs/Plans-AVA-S3.pdf" download="Plans-AVA-S3.pdf">Voir PDF</a>
+                <a className="btn btn--ghost" href="/docs/plans-interactifs/pack/s3/S3-01/appart1_1.html" target="_blank" rel="noreferrer">Plan interactif</a>
                 <button type="button" className="btn btn--primary" onClick={handleShare}>Partager</button>
               </div>
             </article>
@@ -160,7 +210,8 @@ export default function PackPage() {
               </div>
               <p className="muted">Plan PDF + détails. Format optimisé WhatsApp.</p>
               <div className="box__actions">
-                <a className="btn btn--ghost" href="/docs/Plans-AVA-S45.pdf" target="_blank" rel="noreferrer">Voir PDF</a>
+                <a className="btn btn--ghost" href="/docs/Plans-AVA-S45.pdf" download="Plans-AVA-S45.pdf">Voir PDF</a>
+                <a className="btn btn--ghost" href="/docs/plans-interactifs/pack/s45/s45-01/appart2_1.html" target="_blank" rel="noreferrer">Plan interactif</a>
                 <button type="button" className="btn btn--primary" onClick={handleShare}>Partager</button>
               </div>
             </article>
@@ -172,10 +223,144 @@ export default function PackPage() {
               </div>
               <p className="muted">Plan PDF + concept duplex. Ultra clair.</p>
               <div className="box__actions">
-                <a className="btn btn--ghost" href="/docs/Plans-AVA-Duplex.pdf" target="_blank" rel="noreferrer">Voir PDF</a>
+                <a className="btn btn--ghost" href="/docs/Plans-AVA-Duplex.pdf" download="Plans-AVA-Duplex.pdf">Voir PDF</a>
+                <a className="btn btn--ghost" href="/docs/plans-interactifs/pack/duplex/d01/duplex01.html" target="_blank" rel="noreferrer">Plan interactif</a>
                 <button type="button" className="btn btn--primary" onClick={handleShare}>Partager</button>
               </div>
             </article>
+          </div>
+        </div>
+      </section>
+
+      <section className="pack-section pack-section--plans">
+        <div className="container">
+          <div className="section-head">
+            <h2>Tous les plans interactifs</h2>
+            <p>Parcourez chaque unité par type. Un clic pour visualiser ou télécharger.</p>
+          </div>
+
+          <div className="pack-plans-grid">
+            <div className="pack-plans-group">
+              <h3 className="pack-plans-group__title">Duplex (RDC)</h3>
+              <div className="pack-plans-list">
+                {Array.from({ length: 8 }, (_, i) => {
+                  const num = i + 1;
+                  const ref = `D0${num}`;
+                  const lowerRef = `d0${num}`;
+                  return (
+                    <a key={ref} className="pack-plan-link" href={`/docs/plans-interactifs/pack/duplex/${lowerRef}/duplex0${num}.html`} target="_blank" rel="noreferrer">
+                      Voir {ref}
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="pack-plans-group">
+              <h3 className="pack-plans-group__title">S+3 (1er & 3e étages)</h3>
+              <div className="pack-plans-list">
+                {Array.from({ length: 8 }, (_, i) => {
+                  const num = i + 1;
+                  const ref = `S3-0${num}`;
+                  const lowerRef = `s3-0${num}`;
+                  return (
+                    <a key={ref} className="pack-plan-link" href={`/docs/plans-interactifs/pack/s3/${lowerRef}/appart${num < 5 ? `1_${num}` : `3_${num - 4}`}.html`} target="_blank" rel="noreferrer">
+                      Voir {ref}
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="pack-plans-group">
+              <h3 className="pack-plans-group__title">S+4.5 (2e étage)</h3>
+              <div className="pack-plans-list">
+                {Array.from({ length: 4 }, (_, i) => {
+                  const num = i + 1;
+                  const ref = `S45-0${num}`;
+                  const lowerRef = `s45-0${num}`;
+                  const htmlName = num <= 3 ? `appart2_${num}.html` : `appart2_4.html`;
+                  return (
+                    <a key={ref} className="pack-plan-link" href={`/docs/plans-interactifs/pack/s45/${lowerRef}/${htmlName}`} target="_blank" rel="noreferrer">
+                      Voir {ref}
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="pack-section pack-section--comparison">
+        <div className="container">
+          <div className="section-head">
+            <h2>Comparaison par étage</h2>
+            <p>Choisissez votre secteur selon typologie, surface et prestations.</p>
+          </div>
+
+          <div className="comparison-grid">
+            {sectorComparison.map((sector) => (
+              <div key={sector.floor} className="sector-card">
+                <div className="sector-card__header">
+                  <span className="sector-card__icon" aria-hidden="true">{sector.icon}</span>
+                  <div>
+                    <h3>{sector.floor}</h3>
+                    <span className="sector-card__type">{sector.label}</span>
+                  </div>
+                </div>
+                <div className="sector-card__body">
+                  <div className="sector-row">
+                    <span className="sector-row__k">Unités</span>
+                    <span className="sector-row__v">{sector.units}</span>
+                  </div>
+                  <div className="sector-row">
+                    <span className="sector-row__k">Surface</span>
+                    <span className="sector-row__v">{sector.surface}</span>
+                  </div>
+                  <div className="sector-row">
+                    <span className="sector-row__k">Chambres</span>
+                    <span className="sector-row__v">{sector.bedrooms}</span>
+                  </div>
+                  <div className="sector-row">
+                    <span className="sector-row__k">Piscine</span>
+                    <span className="sector-row__v">{sector.pool}</span>
+                  </div>
+                </div>
+                <div className="sector-card__footer">
+                  <a className="btn btn--ghost btn--sm" href={`/inventaire?etage=${sector.urlValue}`}>Voir les unités</a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="pack-section">
+        <div className="container">
+          <div className="section-head">
+            <h2>Tous les plans (PDF)</h2>
+            <p>Brochure complète + plans individuels. Un seul clic pour télécharger.</p>
+          </div>
+
+          <div className="pdf-download">
+            <a
+              className="pdf-download__card"
+              href="/docs/AVA-Brochure.pdf"
+              download="AVA-Brochure.pdf"
+            >
+              <span className="pdf-download__ico" aria-hidden="true">⬇️</span>
+              <span className="pdf-download__txt">
+                <strong>Brochure complète PDF</strong>
+                <em>Plans, photos, prestations — 4 Mo</em>
+              </span>
+            </a>
+
+            <div className="pdf-download__links">
+              <a className="btn btn--ghost btn--sm" href="/docs/Plans-AVA-Duplex.pdf" download="Plans-AVA-Duplex.pdf">Duplex PDF</a>
+              <a className="btn btn--ghost btn--sm" href="/docs/Plans-AVA-S3.pdf" download="Plans-AVA-S3.pdf">S+3 PDF</a>
+              <a className="btn btn--ghost btn--sm" href="/docs/Plans-AVA-S45.pdf" download="Plans-AVA-S45.pdf">S+4.5 PDF</a>
+            </div>
           </div>
         </div>
       </section>

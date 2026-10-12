@@ -3,23 +3,26 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { countByType, UNIT_TYPES, type UnitType } from "../data/inventory";
+import { countByType, totalUnits, UNIT_TYPES, type UnitTypeFilter } from "../data/inventory";
 import styles from "../styles/inventory.module.css";
 
 const TYPE_PARAM = "type";
 
-function slugToType(slug: string | null): UnitType {
+function slugToType(slug: string | null): UnitTypeFilter {
   if (slug === "s3" || slug === "s45" || slug === "duplex") return slug;
-  return "duplex";
+  return "all";
 }
 
 export default function InventoryTabs() {
   const searchParams = useSearchParams();
   const current = slugToType(searchParams.get(TYPE_PARAM));
-  const counts = UNIT_TYPES.map((t) => countByType(t.type));
+  const counts = UNIT_TYPES.map((t) =>
+    t.type === "all" ? totalUnits() : countByType(t.type),
+  );
   const tabsRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
   const [indicator, setIndicator] = useState({ left: 0, width: 0 });
+  const search = searchParams.toString();
 
   function measure() {
     const container = tabsRef.current;
@@ -60,18 +63,29 @@ export default function InventoryTabs() {
     >
       {UNIT_TYPES.map((type, index) => {
         const selected = type.type === current;
-        const href = `?${TYPE_PARAM}=${type.type}`;
+        const params = new URLSearchParams(search);
+        if (type.type === "all") params.delete(TYPE_PARAM);
+        else params.set(TYPE_PARAM, type.type);
+        const query = params.toString();
+        const href = query ? `?${query}` : "/inventaire";
         return (
           <Link
             key={type.type}
             href={href}
             role="tab"
             aria-selected={selected}
-            aria-controls={`inventory-panel-${type.type}`}
+            aria-controls="inventory-panel"
             id={`inventory-tab-${type.type}`}
             className={styles.invTab}
             prefetch={false}
             scroll={false}
+            onKeyDown={(event) => {
+              if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+              event.preventDefault();
+              const direction = event.key === "ArrowRight" ? 1 : -1;
+              const nextIndex = (index + direction + UNIT_TYPES.length) % UNIT_TYPES.length;
+              itemRefs.current[UNIT_TYPES[nextIndex].type]?.click();
+            }}
             ref={(el) => {
               itemRefs.current[type.type] = el;
             }}

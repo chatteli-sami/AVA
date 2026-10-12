@@ -14,7 +14,6 @@
 
 export interface InventoryScrollState {
   scrollY: number;
-  type: string;
 }
 
 const KEY = "ava.inventory-scroll-state";
@@ -35,8 +34,8 @@ export function takeInventoryScrollState(): InventoryScrollState | null {
     if (!raw) return null;
     window.sessionStorage.removeItem(KEY);
     const parsed = JSON.parse(raw) as Partial<InventoryScrollState>;
-    if (typeof parsed.scrollY !== "number" || typeof parsed.type !== "string") return null;
-    return { scrollY: Math.max(0, Math.round(parsed.scrollY)), type: parsed.type };
+    if (typeof parsed.scrollY !== "number") return null;
+    return { scrollY: Math.max(0, Math.round(parsed.scrollY)) };
   } catch {
     return null;
   }
@@ -48,8 +47,8 @@ export function peekInventoryScrollState(): InventoryScrollState | null {
     const raw = window.sessionStorage.getItem(KEY);
     if (!raw) return null;
     const parsed = JSON.parse(raw) as Partial<InventoryScrollState>;
-    if (typeof parsed.scrollY !== "number" || typeof parsed.type !== "string") return null;
-    return { scrollY: Math.max(0, Math.round(parsed.scrollY)), type: parsed.type };
+    if (typeof parsed.scrollY !== "number") return null;
+    return { scrollY: Math.max(0, Math.round(parsed.scrollY)) };
   } catch {
     return null;
   }

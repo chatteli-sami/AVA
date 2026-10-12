@@ -16,6 +16,11 @@ export default function Header() {
   const pathname = usePathname();
   const isHomePage = pathname === "/";
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  // Tracks whether the menu has been opened at least once this session. The
+  // focus-return effect below must only run when the menu actually closes
+  // after being opened — never on initial mount, or the toggle would keep a
+  // visible focus ring painted in the top-left corner forever.
+  const menuWasOpenedRef = useRef(false);
 
   // `prefers-reduced-motion` is read once, before the first effect, so there is no
   // synchronous setState on mount. The header is static once mounted; a mid-session
@@ -95,10 +100,15 @@ export default function Header() {
     };
   }, [closeMenu, menuMounted]);
 
-  // Focus trap - return focus to menu button when menu closes
+  // Focus trap - return focus to the menu button only after the menu has
+  // actually been opened and closed. On initial mount the toggle stays
+  // unfocused so no focus ring is painted before the user interacts.
   useEffect(() => {
-    if (!menuOpen && !menuMounted) {
+    if (menuWasOpenedRef.current && !menuOpen && !menuMounted) {
       menuButtonRef.current?.focus();
+    }
+    if (menuMounted) {
+      menuWasOpenedRef.current = true;
     }
   }, [menuOpen, menuMounted]);
 

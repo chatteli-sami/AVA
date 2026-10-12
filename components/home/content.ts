@@ -8,10 +8,36 @@ export const navItems = [
 ];
 
 export const stats = [
-  { value: "20", label: "Unités haut standing" },
+  { value: 20, label: "Unités haut standing" },
   { value: "S+3 & S+4", label: "Typologies disponibles" },
-  { value: "8", label: "Duplex" },
+  { value: 8, label: "Duplex" },
 ];
+
+export const introButtons = [
+  { label: "Accéder à l'expérience AVA", href: "/pack", outlined: false },
+  { label: "Réserver ma visite", href: "#contact", outlined: true },
+] as const;
+
+export const introImages = {
+  tagline: {
+    src: "/images/Une Melodie de Luxe et de Raffinement.png",
+    alt: "Une Mélodie de Luxe et de Raffinement",
+    width: 2876,
+    height: 323,
+  },
+  building: {
+    src: "/images/FacadePrin.png",
+    alt: "Façade principale d'AVA Residences",
+    width: 4096,
+    height: 2286,
+  },
+  hummingbird: {
+    src: "/images/Oiseau.png",
+    alt: "",
+    width: 1784,
+    height: 2602,
+  },
+} as const;
 
 export const features = [
   {
@@ -38,31 +64,47 @@ export const inventory = {
       { reference: "D01", surface: "146 m²", bedrooms: "3 + 1", pool: "Oui", plan: "Voir plan", planHref: "/inventaire?ref=D01" },
       { reference: "D02", surface: "152 m²", bedrooms: "3 + 1", pool: "Oui", plan: "Voir plan", planHref: "/inventaire?ref=D02" },
       { reference: "D03", surface: "158 m²", bedrooms: "4", pool: "Oui", plan: "Voir plan", planHref: "/inventaire?ref=D03" },
+      { reference: "D04", surface: "164 m²", bedrooms: "3 + 1", pool: "Oui", plan: "Voir plan", planHref: "/inventaire?ref=D04" },
+      { reference: "D05", surface: "170 m²", bedrooms: "3 + 1", pool: "Oui", plan: "Voir plan", planHref: "/inventaire?ref=D05" },
+      { reference: "D06", surface: "176 m²", bedrooms: "4", pool: "Oui", plan: "Voir plan", planHref: "/inventaire?ref=D06" },
+      { reference: "D07", surface: "182 m²", bedrooms: "4", pool: "Oui", plan: "Voir plan", planHref: "/inventaire?ref=D07" },
+      { reference: "D08", surface: "188 m²", bedrooms: "4", pool: "Oui", plan: "Voir plan", planHref: "/inventaire?ref=D08" },
     ],
   },
   s3: {
     label: "Appartements S+3",
     rows: [
-      { reference: "S3-01", surface: "98 m²", bedrooms: "3", pool: "Non", plan: "Voir plan", planHref: "/inventaire?ref=S3-01" },
+      { reference: "S3-01", surface: "98 m²", bedrooms: "3", pool: "Oui", plan: "Voir plan", planHref: "/inventaire?ref=S3-01" },
       { reference: "S3-02", surface: "102 m²", bedrooms: "3", pool: "Oui", plan: "Voir plan", planHref: "/inventaire?ref=S3-02" },
       { reference: "S3-03", surface: "110 m²", bedrooms: "3", pool: "Oui", plan: "Voir plan", planHref: "/inventaire?ref=S3-03" },
+      { reference: "S3-04", surface: "103 m²", bedrooms: "3", pool: "Oui", plan: "Voir plan", planHref: "/inventaire?ref=S3-04" },
+      { reference: "S3-05", surface: "105 m²", bedrooms: "3", pool: "Oui", plan: "Voir plan", planHref: "/inventaire?ref=S3-05" },
+      { reference: "S3-06", surface: "108 m²", bedrooms: "3", pool: "Oui", plan: "Voir plan", planHref: "/inventaire?ref=S3-06" },
+      { reference: "S3-07", surface: "102 m²", bedrooms: "3", pool: "Oui", plan: "Voir plan", planHref: "/inventaire?ref=S3-07" },
+      { reference: "S3-08", surface: "110 m²", bedrooms: "3", pool: "Oui", plan: "Voir plan", planHref: "/inventaire?ref=S3-08" },
     ],
   },
   s45: {
     label: "Appartements S+4.5",
     rows: [
-      { reference: "S45-01", surface: "118 m²", bedrooms: "4", pool: "Oui", plan: "Voir plan", planHref: "/inventaire?ref=S45-01" },
-      { reference: "S45-02", surface: "124 m²", bedrooms: "4", pool: "Oui", plan: "Voir plan", planHref: "/inventaire?ref=S45-02" },
-      { reference: "S45-03", surface: "132 m²", bedrooms: "4 + 1", pool: "Oui", plan: "Voir plan", planHref: "/inventaire?ref=S45-03" },
+      { reference: "S45-01", surface: "118 m²", bedrooms: "4", pool: "Non", plan: "Voir plan", planHref: "/inventaire?ref=S45-01" },
+      { reference: "S45-02", surface: "124 m²", bedrooms: "4", pool: "Non", plan: "Voir plan", planHref: "/inventaire?ref=S45-02" },
+      { reference: "S45-03", surface: "132 m²", bedrooms: "4 + 1", pool: "Non", plan: "Voir plan", planHref: "/inventaire?ref=S45-03" },
+      { reference: "S45-04", surface: "128 m²", bedrooms: "4", pool: "Non", plan: "Voir plan", planHref: "/inventaire?ref=S45-04" },
     ],
   },
 } as const;
 
 export type InventoryKey = keyof typeof inventory;
 
+export const introLabel = "Signature Residences";
+export const buildingImage = introImages.building;
+export const introTagline = "Une Mélodie de Luxe et de Raffinement";
+export const introParagraph = "Dans l'univers fascinant d'AVA Residences, où chaque espace inspire le génie des plus grands maîtres. Découvrez un projet unique, conçu majestueusement pour éveiller vos sens et sublimer votre quotidien.";
+
 export const testimonials = [
   {
-    quote: "PROMED GROUP a su allier modernité et confort. L’accompagnement et la qualité de construction sont irréprochables.",
+    quote: "PROMED GROUP a su allier modernité et confort. L'accompagnement et la qualité de construction sont irréprochables.",
     author: "M. Fares",
     role: "Résident PROMED GROUP",
     image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=200&q=80",

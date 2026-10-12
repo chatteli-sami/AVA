@@ -9,7 +9,7 @@
     "lint": "eslint",
     "type-check": "tsc --noEmit",
     "test": "jest",
-    "check:plans": "node scripts/check-plans.mjs"
+    "check:plans": "tsx scripts/check-plans.ts"
   },
   "dependencies": {
     "framer-motion": "^13.5.0",
@@ -30,6 +30,7 @@
     "jest": "^30.5.2",
     "jest-environment-jsdom": "^30.5.2",
     "tailwindcss": "^4",
+    "tsx": "^4.23.15",
     "typescript": "^5"
   }
 }

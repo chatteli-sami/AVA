@@ -1,0 +1,301 @@
+/* HeroSection — full-screen luxury hero */
+
+/* Spacing scale — responsive, consistent rhythm */
+.hero {
+  --space-xs: clamp(8px, 1.2vw, 12px);
+  --space-sm: clamp(16px, 2vw, 24px);
+  --space-md: clamp(24px, 3vw, 36px);
+  --space-lg: clamp(32px, 4vw, 48px);
+  --space-xl: clamp(48px, 6vw, 72px);
+
+  --hero-bird-size: clamp(120px, 14vw, 180px);
+  --hero-button-height: clamp(56px, 5.5vw, 64px);
+  --hero-button-font: clamp(12px, 1vw, 14px);
+
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  background: var(--ivory);
+  overflow: hidden;
+  padding-top: calc(env(safe-area-inset-top) + 120px);
+  padding-bottom: var(--space-lg);
+}
+
+.heroBird {
+  position: absolute;
+  top: clamp(16px, 1.5vw, 24px);
+  left: clamp(16px, 2vw, 24px);
+  z-index: 3;
+  width: var(--hero-bird-size);
+  height: var(--hero-bird-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.85;
+}
+
+.heroBirdImage {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.heroInner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-inline: clamp(24px, 5vw, 80px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xl);
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  width: 100%;
+  gap: var(--space-xl);
+}
+
+.heroText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 560px;
+}
+
+.heroKicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(14px, 1.2vw, 16px);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: var(--text-light);
+  margin-bottom: var(--space-sm);
+}
+
+.heroKickerDash {
+  display: inline-block;
+  width: 52px;
+  height: 1px;
+  background: var(--gold-accent);
+  flex-shrink: 0;
+}
+
+.heroTitle {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(42px, 4.2vw, 64px);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin: 0 0 var(--space-md);
+  max-width: 90%;
+}
+
+.heroTitle .golden {
+  color: var(--gold-accent);
+}
+
+.heroDivider {
+  width: 72px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold-accent), transparent);
+  margin: 0 0 var(--space-md);
+}
+
+.heroParagraph {
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: clamp(15px, 1.05vw, 17px);
+  font-weight: 300;
+  line-height: 1.85;
+  max-width: 48ch;
+  color: var(--text-light);
+  margin: 0 0 var(--space-lg);
+}
+
+.heroButtons {
+  display: flex;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.heroButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: var(--hero-button-height);
+  padding: 0 38px;
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: var(--hero-button-font);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  border: 1px solid var(--gold-accent);
+  border-radius: 0;
+  transition: background-color 0.3s var(--easing), color 0.3s var(--easing), transform 0.3s var(--easing);
+  cursor: pointer;
+  will-change: transform;
+}
+
+.heroButtonFilled {
+  background: var(--gold-accent);
+  color: #fff;
+}
+
+.heroButtonGhost {
+  background: transparent;
+  color: var(--gold-accent);
+}
+
+@media (hover: hover) {
+  .heroButtonFilled:hover {
+    background: var(--gold-dark);
+    transform: translateY(-2px);
+  }
+
+  .heroButtonGhost:hover {
+    background: var(--gold-accent);
+    color: var(--ink);
+    transform: translateY(-2px);
+  }
+}
+
+.heroButtonArrow {
+  display: inline-block;
+  transition: transform 0.3s var(--easing);
+}
+
+@media (hover: hover) {
+  .heroButton:hover .heroButtonArrow {
+    transform: translateX(6px);
+  }
+}
+
+  .heroMedia {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.heroMediaFrame {
+  position: relative;
+  width: clamp(360px, 48vw, 700px);
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.22);
+}
+
+.heroMediaImage {
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+
+@media (hover: hover) {
+  .heroMediaFrame:hover .heroMediaImage {
+    transform: scale(1.04);
+    transition: transform 0.9s var(--easing);
+  }
+}
+
+/* -------------------------------------------------------------- tablet */
+@media (max-width: 1024px) {
+  .heroInner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: clamp(28px, 5vw, 48px);
+  }
+
+  .heroGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .heroMedia {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .heroMediaFrame {
+    width: 100%;
+    max-width: 720px;
+  }
+
+  .heroText {
+    max-width: 100%;
+  }
+}
+
+/* -------------------------------------------------------------- phone */
+@media (max-width: 768px) {
+  .hero {
+    padding-top: calc(env(safe-area-inset-top) + clamp(88px, 16vh, 140px));
+  }
+
+  .heroInner {
+    padding-inline: clamp(20px, 6vw, 32px);
+    gap: clamp(24px, 5vw, 36px);
+  }
+
+  .heroTitle {
+    font-size: clamp(34px, 7vw, 48px);
+    max-width: 94%;
+  }
+
+  .heroParagraph {
+    margin: 0 0 clamp(32px, 6vw, 40px);
+    font-size: clamp(14px, 3.6vw, 15.5px);
+  }
+
+  .heroButtons {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .heroButton {
+    width: 100%;
+    justify-content: center;
+    min-height: 52px;
+    font-size: 12px;
+  }
+}
+
+/* -------------------------------------------------------------- small phone */
+@media (max-width: 480px) {
+  .heroInner {
+    padding-inline: clamp(16px, 5vw, 20px);
+  }
+
+  .heroButton {
+    padding: 0 22px;
+    min-height: 48px;
+    font-size: 11.5px;
+  }
+}
+
+/* -------------------------------------------------------------- reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .heroMediaImage {
+    transition: none;
+  }
+
+  .heroButton,
+  .heroButtonArrow {
+    transition: none;
+  }
+}

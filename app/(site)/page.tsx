@@ -1,14 +1,14 @@
 import ContactSection from "../../components/home/ContactSection";
 import FeaturesSection from "../../components/home/FeaturesSection";
 import GallerySection from "../../components/home/GallerySection";
-import HeroSection from "../../components/home/HeroSection";
+import IntroSection from "../../components/home/IntroSection";
 import InventoryHashRedirect from "../../components/InventoryHashRedirect";
 import LocationSection from "../../components/home/LocationSection";
 import PromoterSection from "../../components/home/PromoterSection";
 import ScrollStorySection from "../../components/home/ScrollStorySection";
+import Section from "../../components/Section";
 import SiteFooter from "../../components/home/SiteFooter";
 import TestimonialsSection from "../../components/home/TestimonialsSection";
-import Section from "../../components/Section";
 
 export default function Home() {
   return (
@@ -16,9 +16,7 @@ export default function Home() {
       <InventoryHashRedirect />
       <main>
         <ScrollStorySection />
-        <Section threshold={0.12} rootMargin="0px 0px -72px 0px" once>
-          <HeroSection />
-        </Section>
+        <IntroSection />
         <Section threshold={0.12} once>
           <LocationSection />
         </Section>

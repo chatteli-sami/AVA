@@ -1,0 +1,586 @@
+/* ==================================================================
+   IntroSection – cinematic gallery reveal layout
+   Design tokens driven by CSS variables so light/dark themes sync.
+   Pattern: content visible by default; JS-controlled reveal via classes.
+   ================================================================== */
+
+:root {
+  --intro-gold: #b4793f;
+  --intro-gold-light: #e0b883;
+  --intro-ink: #2b2119;
+  --intro-muted: #76685a;
+  --intro-bg: var(--ivory);
+  --intro-easing: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root[data-theme="dark"] {
+  --intro-gold: #d09a60;
+  --intro-gold-light: #d4b89e;
+  --intro-ink: var(--ink);
+  --intro-muted: var(--text-light);
+  --intro-bg: var(--beige-light);
+}
+
+/* ==================================================================
+   Section container
+   ================================================================== */
+.introSection {
+  position: relative;
+  background: var(--intro-bg);
+  overflow: visible;
+  height: auto;
+  isolation: isolate;
+  padding-top: clamp(110px, 16vh, 200px);
+  padding-bottom: clamp(40px, 6vh, 72px);
+}
+
+/* Building scene: full-bleed, 85vh tall */
+.buildingScene {
+  position: relative;
+  width: 100%;
+  height: clamp(420px, 85vh, 900px);
+  max-height: 900px;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+.buildingWrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ==================================================================
+   Building image
+   ================================================================== */
+.buildingImageWrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 2px;
+  transform-style: preserve-3d;
+  perspective: 1200px;
+  /* Parallax moves subtly with scroll; scale controlled by reveal class */
+  transform: translateY(var(--building-parallax-y, 0px)) scale(var(--building-scale, 1));
+}
+
+.buildingImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+  /* Soft fade only at the bottom ~10% of the image */
+  mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+}
+
+/* Top light gradient protects header/logo readability */
+.buildingImageWrap::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: clamp(50px, 7vh, 90px);
+  background: linear-gradient(to bottom, rgba(246, 241, 233, 0.5), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+:root[data-theme="dark"] .buildingImageWrap::before {
+  background: linear-gradient(to bottom, rgba(28, 26, 23, 0.5), transparent);
+}
+
+/* Hover tilt – desktop only */
+@media (hover: hover) {
+  .buildingImageWrap:hover {
+    transform: translateY(var(--building-parallax-y, 0px))
+               scale(var(--building-scale, 1))
+               rotateX(var(--tilt-x, 0deg))
+               rotateY(var(--tilt-y, 0deg));
+    transition: transform 0.6s var(--intro-easing);
+  }
+}
+
+/* ==================================================================
+   Floating content panel – visible by default
+   ================================================================== */
+.floatingPanel {
+  position: absolute;
+  left: clamp(40px, 5vw, 80px);
+  top: clamp(420px, 52vh, 560px);
+  width: clamp(380px, 520px, 540px);
+  max-width: 90vw;
+  background: rgba(246, 241, 233, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(180, 121, 63, 0.15);
+  border-radius: 4px;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.12);
+  padding: 32px 28px;
+  z-index: 2;
+  opacity: 1;
+  transform: translateY(var(--panel-parallax, 0px));
+}
+
+:root[data-theme="dark"] .floatingPanel {
+  background: rgba(28, 26, 23, 0.8);
+  border-color: rgba(208, 154, 96, 0.15);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.25);
+}
+
+.floatingDash {
+  display: inline-block;
+  width: 44px;
+  height: 1px;
+  background: var(--intro-gold);
+  margin-bottom: 16px;
+}
+
+.floatingLabel {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(14px, 1.2vw, 16px);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  color: var(--intro-muted);
+  margin-bottom: 14px;
+}
+
+.floatingTagline {
+  display: block;
+  width: min(480px, 100%);
+  height: auto;
+  margin-bottom: 28px;
+}
+
+.floatingDivider {
+  width: 64px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--intro-gold), var(--intro-gold-light));
+  margin: 28px 0;
+}
+
+.floatingParagraph {
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: clamp(15px, 1.05vw, 17px);
+  font-weight: 300;
+  line-height: 1.8;
+  max-width: 44ch;
+  color: var(--intro-muted);
+  margin: 0 0 32px;
+}
+
+.floatingButtons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.floatingButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 0 28px;
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: clamp(11px, 0.85vw, 13px);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  border: 1px solid var(--intro-gold);
+  border-radius: 0;
+  transition: background-color 0.3s var(--intro-easing),
+              color 0.3s var(--intro-easing),
+              transform 0.3s var(--intro-easing);
+  cursor: pointer;
+  will-change: transform;
+}
+
+.floatingButton.filled {
+  background: var(--intro-gold);
+  color: #fff;
+}
+
+.floatingButton.outlined {
+  background: transparent;
+  color: var(--intro-gold);
+}
+
+@media (hover: hover) {
+  .floatingButton.filled:hover {
+    background: var(--intro-gold-light);
+    transform: translateY(-2px);
+  }
+
+  .floatingButton.outlined:hover {
+    background: var(--intro-gold);
+    color: var(--intro-bg);
+    transform: translateY(-2px);
+  }
+}
+
+.floatingButton:focus-visible {
+  outline: 2px solid var(--intro-gold);
+  outline-offset: 2px;
+}
+
+.floatingButton.filled:focus-visible {
+  outline-color: var(--intro-gold-light);
+}
+
+.buttonArrow {
+  display: inline-block;
+  transition: transform 0.3s var(--intro-easing);
+}
+
+.floatingButton:hover .buttonArrow {
+  transform: translateX(6px);
+}
+
+/* ==================================================================
+   Stats band – normal flow, below building scene
+   ================================================================== */
+.statsBand {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: clamp(32px, 4vw, 48px) auto 0;
+  padding: 0 clamp(20px, 4vw, 40px);
+}
+
+.statsList {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  list-style: none;
+  margin: 0;
+  padding: clamp(20px, 2vw, 28px) 0;
+  background: var(--intro-bg);
+  border-top: 1px solid rgba(180, 121, 63, 0.3);
+  border-bottom: 1px solid rgba(180, 121, 63, 0.3);
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: clamp(18px, 2vw, 28px) 12px;
+  background: var(--intro-bg);
+  position: relative;
+}
+
+.statItem + .statItem {
+  border-left: 1px solid rgba(180, 121, 63, 0.25);
+}
+
+.statItem::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 12px;
+  bottom: 12px;
+  width: 1px;
+  background: var(--intro-gold);
+  opacity: 0.25;
+  transform: scaleY(1);
+  transform-origin: top;
+  transition: opacity 0.3s var(--intro-easing);
+}
+
+.statItem:first-child::before {
+  display: none;
+}
+
+.statValue {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(38px, 3.6vw, 56px);
+  font-weight: 300;
+  line-height: 1;
+  min-height: clamp(38px, 3.6vw, 56px);
+  color: var(--intro-gold);
+  margin-bottom: 10px;
+  white-space: nowrap;
+}
+
+.statValue.text {
+  font-size: clamp(26px, 2.8vw, 40px);
+  min-height: clamp(26px, 2.8vw, 40px);
+}
+
+.statLabel {
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: clamp(11px, 0.9vw, 13px);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--intro-muted);
+  line-height: 1.35;
+  max-width: 130px;
+}
+
+/* ==================================================================
+   Hummingbird – visible by default, top-right, behind content
+   ================================================================== */
+.hummingbirdSection {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: visible;
+}
+
+.hummingbird {
+  position: absolute;
+  top: clamp(8px, 1.5vh, 16px);
+  right: clamp(20px, 3vw, 40px);
+  width: clamp(80px, 8vw, 120px);
+  height: auto;
+  opacity: 0.32;
+  transform: scale(0.45);
+  will-change: transform, opacity;
+}
+
+.hummingbirdReduced {
+  opacity: 0.22 !important;
+  transform: scale(0.45) !important;
+}
+
+/* ==================================================================
+   Reveal animation classes (set by JavaScript via AnimatedIntro)
+   ================================================================== */
+
+/* ==================================================================
+   Reveal wrapper (set by AnimatedIntro)
+   ================================================================== */
+.introReveal {
+  position: relative;
+  width: 100%;
+}
+
+/* js-locked: hidden state before reveal */
+.introReveal.js-locked .buildingImageWrap {
+  --building-scale: 1.08;
+}
+
+.introReveal.js-locked .floatingPanel,
+.introReveal.js-locked .floatingDash,
+.introReveal.js-locked .floatingLabel,
+.introReveal.js-locked .floatingTagline,
+.introReveal.js-locked .floatingDivider,
+.introReveal.js-locked .floatingParagraph,
+.introReveal.js-locked .floatingButtons,
+.introReveal.js-locked .statsBand,
+.introReveal.js-locked .statsList,
+.introReveal.js-locked .statItem {
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+/* inView: trigger CSS transitions to reveal */
+.introReveal.inView .buildingImageWrap {
+  --building-scale: 1;
+  transition: --building-scale 1.2s var(--intro-easing);
+}
+
+.introReveal.inView .floatingDash {
+  transition: opacity 0.6s var(--intro-easing) 0.08s, transform 0.6s var(--intro-easing) 0.08s;
+}
+.introReveal.inView .floatingLabel {
+  transition: opacity 0.6s var(--intro-easing) 0.16s, transform 0.6s var(--intro-easing) 0.16s;
+}
+.introReveal.inView .floatingTagline {
+  transition: opacity 0.8s var(--intro-easing) 0.24s, transform 0.8s var(--intro-easing) 0.24s;
+}
+.introReveal.inView .floatingDivider {
+  transition: opacity 0.6s var(--intro-easing) 0.32s, transform 0.6s var(--intro-easing) 0.32s;
+}
+.introReveal.inView .floatingParagraph {
+  transition: opacity 0.6s var(--intro-easing) 0.4s, transform 0.6s var(--intro-easing) 0.4s;
+}
+.introReveal.inView .floatingButtons {
+  transition: opacity 0.6s var(--intro-easing) 0.48s, transform 0.6s var(--intro-easing) 0.48s;
+}
+.introReveal.inView .statsBand {
+  transition: opacity 0.6s var(--intro-easing) 0.56s, transform 0.6s var(--intro-easing) 0.56s;
+}
+
+/* Stat items stagger */
+.introReveal.inView .statItem:nth-child(1) {
+  transition: opacity 0.6s var(--intro-easing) 0.12s, transform 0.6s var(--intro-easing) 0.12s;
+}
+.introReveal.inView .statItem:nth-child(2) {
+  transition: opacity 0.6s var(--intro-easing) 0.24s, transform 0.6s var(--intro-easing) 0.24s;
+}
+.introReveal.inView .statItem:nth-child(3) {
+  transition: opacity 0.6s var(--intro-easing) 0.36s, transform 0.6s var(--intro-easing) 0.36s;
+}
+
+/* forceFinal: immediate visible state, no animation */
+.introReveal.forceFinal .buildingImageWrap,
+.introReveal.forceFinal .floatingPanel,
+.introReveal.forceFinal .floatingDash,
+.introReveal.forceFinal .floatingLabel,
+.introReveal.forceFinal .floatingTagline,
+.introReveal.forceFinal .floatingDivider,
+.introReveal.forceFinal .floatingParagraph,
+.introReveal.forceFinal .floatingButtons,
+.introReveal.forceFinal .statsBand,
+.introReveal.forceFinal .statsList,
+.introReveal.forceFinal .statItem {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+  --building-scale: 1 !important;
+  clip-path: none !important;
+}
+
+/* ==================================================================
+   Reduced motion
+   ================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .buildingImageWrap,
+  .floatingPanel,
+  .floatingDash,
+  .floatingLabel,
+  .floatingTagline,
+  .floatingDivider,
+  .floatingParagraph,
+  .floatingButtons,
+  .statsBand,
+  .statItem,
+  .hummingbird {
+    opacity: 1 !important;
+    transform: none !important;
+    --building-scale: 1 !important;
+    animation: none !important;
+    clip-path: none !important;
+  }
+}
+
+/* ==================================================================
+   Responsive: tablet (768px to 1023px)
+   ================================================================== */
+@media (max-width: 1023px) and (min-width: 768px) {
+  .buildingScene {
+    height: 70vh;
+    min-height: 500px;
+    max-height: 700px;
+  }
+
+  .floatingPanel {
+    width: clamp(480px, 55vw, 680px);
+    top: auto;
+    bottom: clamp(60px, 8vh, 100px);
+    left: clamp(24px, 4vw, 48px);
+  }
+
+  .statsBand {
+    margin-top: clamp(24px, 3vw, 36px);
+    padding: 0 clamp(16px, 3vw, 24px);
+  }
+
+  .hummingbird {
+    width: clamp(50px, 5vw, 80px);
+    opacity: 0.3;
+  }
+}
+
+/* ==================================================================
+   Responsive: phone (under 768px)
+   ================================================================== */
+@media (max-width: 767px) {
+  .buildingScene {
+    height: 56vh;
+    min-height: 350px;
+    max-height: 500px;
+  }
+
+  .floatingPanel {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    top: auto;
+    left: auto;
+    margin-top: -48px;
+    background: rgba(246, 241, 233, 0.9);
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border-radius: 0;
+    padding: clamp(24px, 5vw, 32px) clamp(16px, 4vw, 24px);
+    margin-bottom: clamp(16px, 3vw, 24px);
+  }
+
+  :root[data-theme="dark"] .floatingPanel {
+    background: rgba(28, 26, 23, 0.85);
+  }
+
+  .floatingButtons {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .floatingButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .statsBand {
+    margin-top: clamp(16px, 3vw, 24px);
+    padding: 0;
+  }
+
+  .statsList {
+    padding: clamp(16px, 2vw, 24px) 0;
+  }
+
+  .statItem + .statItem {
+    border-left: none;
+  }
+
+  .statItem {
+    padding: clamp(14px, 2vw, 20px) 8px;
+  }
+}
+
+/* ==================================================================
+   Responsive: small phone (under 360px) – stats as list
+   ================================================================== */
+@media (max-width: 359px) {
+  .statsList {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .statItem {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+    border-bottom: 1px solid rgba(180, 121, 63, 0.15);
+    padding: 12px 16px;
+    margin: 0;
+  }
+
+  .statItem:first-child {
+    border-top: 1px solid rgba(180, 121, 63, 0.15);
+  }
+
+  .statItem::before {
+    display: none;
+  }
+
+  .statValue {
+    margin-bottom: 0;
+  }
+}

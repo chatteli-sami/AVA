@@ -59,7 +59,7 @@ export default function PlanLightbox({
       if (event.key === "Tab") {
         const focusable = Array.from(
           document.querySelectorAll<HTMLElement>(
-            `.${styles.invLightboxInner} a[href], .${styles.invLightboxInner} button:not([disabled]), .${styles.invLightboxInner} [tabindex]:not([tabindex="-1"])`,
+            `.${styles.invLightboxInner} a[href], .${styles.invLightboxInner} button:not([disabled]), .${styles.invLightboxInner} summary, .${styles.invLightboxInner} iframe, .${styles.invLightboxInner} [tabindex]:not([tabindex="-1"])`,
           ),
         );
         if (focusable.length === 0) {
@@ -107,7 +107,7 @@ export default function PlanLightbox({
 
   if (!open || !unit) return null;
 
-  const typeLabel = TYPE_LABELS[unit.type] ?? unit.type;
+  const typeLabel = TYPE_LABELS[unit.type];
 
   return createPortal(
     <div
@@ -127,7 +127,7 @@ export default function PlanLightbox({
             </div>
           }
         >
-          <ZoomablePlan src={unit.planSrc} alt={`Plan de l'unité ${unit.ref}`} blurDataURL={unit.planBlur} />
+          <ZoomablePlan src={unit.planImage} alt={`Plan de l'unité ${unit.ref}`} blurDataURL={unit.planBlur} />
         </Suspense>
 
         <div className={styles.invLightboxInfo}>
@@ -159,6 +159,19 @@ export default function PlanLightbox({
                 </svg>
                 Télécharger le plan (PDF)
               </a>
+            )}
+            {unit.interactivePlan && (
+              <details className={styles.invInteractivePlan}>
+                <summary className={styles.invBtn}>Voir le plan interactif</summary>
+                <iframe
+                  className={styles.invInteractiveFrame}
+                  src={unit.interactivePlan}
+                  title={`Plan interactif de l'unité ${unit.ref}`}
+                  loading="lazy"
+                  sandbox="allow-scripts"
+                  referrerPolicy="no-referrer"
+                />
+              </details>
             )}
             <Link className={styles.invBtn} href={contactHref}>
               <svg viewBox="0 0 24 24" fill="none" width="16" height="16" aria-hidden="true">

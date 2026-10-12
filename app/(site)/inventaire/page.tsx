@@ -1,14 +1,13 @@
 ﻿import type { Metadata } from "next";
 import Link from "next/link";
 import {
-  getUnitsByType,
+  floorFromUrlValue,
   maxSurface,
   minSurface,
   totalUnits,
   unitsWithPool,
-  type UnitType,
+  type Unit,
 } from "../../../data/inventory";
-import InventoryTabs from "../../../components/InventoryTabs";
 import SummaryStrip from "../../../components/SummaryStrip";
 import InventoryList from "../../../components/InventoryList";
 import styles from "../../../styles/inventory.module.css";
@@ -46,16 +45,15 @@ export const metadata: Metadata = {
 };
 
 interface InventairePageProps {
-  searchParams: Promise<{ type?: string }>;
+  searchParams: Promise<{ etage?: string }>;
 }
 
 export default async function InventairePage({ searchParams }: InventairePageProps) {
   const params = await searchParams;
-  const rawType = params.type;
-  const activeType: UnitType =
-    rawType === "s3" || rawType === "s45" || rawType === "duplex" ? rawType : "duplex";
+  const activeFloor = floorFromUrlValue(params.etage);
 
-  const units = [...getUnitsByType(activeType)];
+  const { UNITS } = await import("../../../data/inventory");
+  const units: Unit[] = [...UNITS];
   const unitsWithPoolCount = unitsWithPool();
 
   return (
@@ -80,9 +78,10 @@ export default async function InventairePage({ searchParams }: InventairePagePro
           maxSurface={maxSurface()}
         />
 
-        <InventoryTabs />
-
-        <InventoryList key={activeType} units={units} activeType={activeType} />
+        <InventoryList
+          units={units}
+          initialFloor={activeFloor}
+        />
 
         <div className={styles.invCta}>
           <p className={styles.invCtaK}>Une visite privée ?</p>

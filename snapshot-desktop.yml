@@ -1,0 +1,9 @@
+- generic [ref=f1e1]:
+  - generic [ref=f1e5]:
+    - banner "Navigation principale":
+      - generic [ref=f1e6]
+    - region "Contenu de la page" [ref=f1e14]:
+      - main [ref=f1e15]
+      - generic [ref=f1e311]
+  - button "Open Next.js Dev Tools" [ref=f1e369] [cursor=pointer]
+  - alert [ref=f1e373]

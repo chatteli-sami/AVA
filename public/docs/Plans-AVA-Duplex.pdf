@@ -1,3 +1,51 @@
-AVA Residences plan Duplex placeholder
-
-This file is generated for the AVA pack page and can be replaced with the final PDF asset at any time.
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /PageLayout /SinglePage /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 5 0 R /Resources << /Font << /F1 6 0 R /F2 7 0 R >> >> >>
+endobj
+5 0 obj
+<< /Length 220 >>
+stream
+BT /F1 32 Tf 60 700 Td (Plans AVA — Typologie Duplex) Tj ET
+BT /F2 16 Tf 60 650 Td (Duplex — Rez-de-chaussée) Tj ET
+BT /F2 14 Tf 60 610 Td (Surface : 146–188 m²) Tj ET
+BT /F2 14 Tf 60 580 Td (Chambres : 3+1 / 4) Tj ET
+BT /F2 14 Tf 60 550 Td (Piscine : privative) Tj ET
+BT /F2 14 Tf 60 520 Td (Unités : 8 duplex disponibles) Tj ET
+BT /F2 12 Tf 60 470 Td (D01 : 146 m² — 3+1 ch — piscine) Tj ET
+BT /F2 12 Tf 60 440 Td (D02 : 152 m² — 3+1 ch — piscine) Tj ET
+BT /F2 12 Tf 60 410 Td (D03 : 158 m² — 4 ch — piscine) Tj ET
+BT /F2 12 Tf 60 380 Td (D04 : 164 m² — 3+1 ch — piscine) Tj ET
+BT /F2 12 Tf 60 350 Td (D05 : 170 m² — 3+1 ch — piscine) Tj ET
+BT /F2 12 Tf 60 320 Td (D06 : 176 m² — 4 ch — piscine) Tj ET
+BT /F2 12 Tf 60 290 Td (D07 : 182 m² — 4 ch — piscine) Tj ET
+BT /F2 12 Tf 60 260 Td (D08 : 188 m² — 4 ch — piscine) Tj ET
+endstream
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+7 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000062 00000 n 
+0000000119 00000 n 
+0000000280 00000 n 
+0000000440 00000 n 
+0000000540 00000 n 
+0000000606 00000 n 
+0000000672 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+792
+%%EOF

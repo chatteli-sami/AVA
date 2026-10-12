@@ -4,7 +4,7 @@ const planCards = [
   {
     title: "Plan interactif",
     description: "Navigation cliquable de la façade et des étages du projet AVA.",
-    href: "/docs/plans/",
+    href: "/docs/plans-interactifs/index.html",
     tag: "Interactive",
   },
   {
