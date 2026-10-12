@@ -1,10 +1,11 @@
+import Image from "next/image";
 export default function SiteFooter() {
   return (
     <footer>
       <div className="container">
         <div className="footer-grid">
           <div className="footer-column">
-            <img src="/images/logoava.avif" alt="AVA Tunis" width={200} height={70} loading="lazy" />
+            <Image src="/images/logoava.avif" alt="AVA Tunis" width={200} height={70} loading="lazy" />
             <p>Redéfinir l’art de vivre en Tunisie avec des résidences d’exception qui allient luxe, confort et investissement intelligent.</p>
             <div className="social-links" aria-label="Réseaux sociaux">
               <a href="https://www.facebook.com/mzpromed/" target="_blank" rel="noreferrer"><i className="fab fa-facebook" aria-hidden="true"></i><span className="sr-only">Facebook</span></a>

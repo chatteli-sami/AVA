@@ -1199,90 +1199,6 @@ nav a:hover::after {
   background: #fff;
 }
 
-.promoter-section {
-  padding: 30px 0;
-  position: relative;
-}
-
-.promoter-container {
-  position: relative;
-  margin: 0 auto;
-}
-
-.promoter-card {
-  background: transparent;
-  border-radius: 15px;
-  padding: 50px 40px;
-  position: relative;
-  z-index: 2;
-  text-align: center;
-}
-
-.promoter-logo {
-  margin-bottom: 30px;
-}
-
-.promoter-logo img {
-  max-width: 250px;
-  height: auto;
-  filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.15));
-}
-
-.promoter-logo1 {
-  margin-bottom: 30px;
-}
-
-.promoter-logo1 img {
-  max-width: 60px;
-  height: auto;
-  filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.15));
-}
-
-.promoter-title {
-  font-size: 2rem;
-  color: var(--text-dark);
-  margin-bottom: 25px;
-  position: relative;
-  display: inline-block;
-  font-weight: 500;
-}
-
-.promoter-title::after {
-  content: "";
-  position: absolute;
-  bottom: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 2px;
-  background: var(--gold-accent);
-}
-
-.promoter-content {
-  font-size: 1.1rem;
-  line-height: 1.9;
-  color: var(--text-light);
-  margin-bottom: 30px;
-  text-align: justify;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.promoter-content strong {
-  color: var(--text-dark);
-  font-weight: 500;
-}
-
-.signature {
-  margin-top: 30px;
-  text-align: right;
-  font-style: italic;
-  color: var(--gold-accent);
-  font-family: var(--font-cormorant), serif;
-  font-size: 1.2rem;
-}
-
 .testimonials {
   padding: 120px 0;
   background: var(--beige-medium);
@@ -1736,13 +1652,6 @@ footer::before {
   .menu-toggle { width: 46px; height: 46px; font-size: 22px; }
   .fullscreen-menu { padding: 88px 25px 32px; }
   .fullscreen-menu li a { grid-template-columns: 36px 1fr 20px; gap: 10px; }
-  .promoter-card { padding: 28px 18px; }
-  .promoter-title { font-size: clamp(1.4rem, 4.2vw, 1.5rem); line-height: 1.2; margin-bottom: 14px; }
-  .promoter-title::after { width: 44px; }
-  .promoter-content { font-size: clamp(0.9rem, 3.7vw, 1rem); line-height: 1.65; margin-bottom: 18px; text-align: left; }
-  .promoter-logo img { max-width: 110px; }
-  .promoter-logo1 img { max-width: 80px; }
-  .signature { font-size: clamp(0.9rem, 3.6vw, 1rem); text-align: center; margin-top: 12px; }
   footer { padding: 48px 0 28px; }
   .footer-grid { grid-template-columns: 1fr; gap: 28px; }
   .footer-column { text-align: center; }

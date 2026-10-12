@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import Image from "next/image";
 
 const quickLinks = [
   { label: "WhatsApp", href: "https://wa.me/21692700100", icon: "🟢" },
@@ -172,7 +173,7 @@ export default function PackPage() {
 
           <div className="hero-pack__right">
             <div className="heroCard">
-              <img src="/images/SuitePanoramique.jpg" alt="Suite panoramique AVA" width={900} height={600} loading="lazy" />
+              <Image src="/images/SuitePanoramique.jpg" alt="Suite panoramique AVA" width={900} height={600} loading="lazy" />
               <div className="heroCard__overlay">
                 <div className="heroCard__badge">Jardins de Carthage</div>
                 <div className="heroCard__line">Résidence d’exception — visites privées</div>

@@ -1,4 +1,5 @@
 import { testimonials } from "./content";
+import Image from "next/image";
 
 export default function TestimonialsSection() {
   return (
@@ -13,7 +14,7 @@ export default function TestimonialsSection() {
             <article className="testimonial-card" key={item.author}>
               <p className="testimonial-content">« {item.quote} »</p>
               <div className="testimonial-author">
-                <div className="author-image"><img src={item.image} alt={item.author} width={72} height={72} loading="lazy" /></div>
+                <div className="author-image"><Image src={item.image} alt={item.author} width={72} height={72} loading="lazy" /></div>
                 <div className="author-info"><h4>{item.author}</h4><p>{item.role}</p></div>
               </div>
             </article>

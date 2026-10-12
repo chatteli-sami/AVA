@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { usePrefersReducedMotion } from "../../hooks/usePrefersReducedMotion";
 import type { BuildingImage } from "./AnimatedBuilding";
 import styles from "./IntroSection.module.css";
+import Image from "next/image";
 
 type FlyingHummingbirdProps = {
   image: BuildingImage;
@@ -88,7 +89,7 @@ export default function FlyingHummingbird({ image }: FlyingHummingbirdProps) {
         onTouchMoveCapture={(e) => e.preventDefault()}
         onClick={(e) => e.preventDefault()}
       >
-        <img
+        <Image
           src={image.src}
           alt=""
           width={image.width}

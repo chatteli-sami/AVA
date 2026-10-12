@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Cormorant_Garamond, Inter_Tight, Montserrat } from "next/font/google";
 import CoverTransitionLayer from "../components/CoverTransitionLayer";
 import ScrollReset from "../components/ScrollReset";
@@ -33,22 +34,18 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="fr" className={`${cormorant.variable} ${montserrat.variable} ${interTight.variable}`} suppressHydrationWarning>
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){var t=null;try{t=localStorage.getItem('ava-theme')}catch(e){}if(t!=='light'&&t!=='dark')t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t})()`,
-          }}
-        />
+        <Script id="theme-init" strategy="beforeInteractive">
+          {`(function(){var t=null;try{t=localStorage.getItem('ava-theme')}catch(e){}if(t!=='light'&&t!=='dark')t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t})()`}
+        </Script>
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
           crossOrigin="anonymous"
           referrerPolicy="no-referrer"
         />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){var d=document.documentElement;var skip=(window.matchMedia('(prefers-reduced-motion: reduce)').matches)||(function(){try{return sessionStorage.getItem('galleryReturnPending')==='true'}catch(e){return false}}());if(skip){d.dataset.intro='done';d.style.overflow=''}else{d.removeAttribute('data-intro')}})();`,
-          }}
-        />
+        <Script id="intro-skip" strategy="beforeInteractive">
+          {`(function(){var d=document.documentElement;var skip=(window.matchMedia('(prefers-reduced-motion: reduce)').matches)||(function(){try{return sessionStorage.getItem('galleryReturnPending')==='true'}catch(e){return false}}());if(skip){d.dataset.intro='done';d.style.overflow=''}else{d.removeAttribute('data-intro')}})();`}
+        </Script>
         <style
           dangerouslySetInnerHTML={{
             __html: `#intro-overlay{position:fixed;inset:0;z-index:9999;background:var(--beige-light,#F0F1FA);overflow:hidden;opacity:1;visibility:visible;pointer-events:auto}#intro-overlay .active{opacity:1;visibility:visible}html[data-intro] #intro-overlay{opacity:0;visibility:hidden;pointer-events:none;transition:opacity 1000ms ease}html[data-intro="done"] #intro-overlay{transition:none}`,

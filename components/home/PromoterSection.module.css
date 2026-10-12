@@ -1,0 +1,214 @@
+.promoterSection {
+  --promoter-card-width: min(920px, 90vw);
+  --promoter-accent-thickness: 1px;
+
+  padding: clamp(60px, 10vw, 96px) 0;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.promoterContainer {
+  position: relative;
+  z-index: 1;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  padding: 0 clamp(24px, 5vw, 80px);
+}
+
+.promoterCard {
+  width: var(--promoter-card-width);
+  background: linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--ivory) 88%, transparent 12%),
+      color-mix(in srgb, var(--ivory) 92%, transparent 8%)
+    ),
+    radial-gradient(
+      ellipse at 50% 0%,
+      color-mix(in srgb, var(--gold-accent) 4%, transparent 60%),
+      transparent 70%
+    );
+  border: var(--promoter-accent-thickness) solid
+    color-mix(in srgb, var(--gold-accent) 50%, transparent 50%);
+  border-radius: 16px;
+  padding: clamp(40px, 4.5vw, 56px) clamp(32px, 4vw, 48px);
+  backdrop-filter: blur(12px) saturate(1.15);
+  -webkit-backdrop-filter: blur(12px) saturate(1.15);
+  box-shadow:
+    0 20px 60px color-mix(in srgb, var(--ink) 6%, transparent 94%),
+    0 4px 16px color-mix(in srgb, var(--ink) 4%, transparent 96%);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.promoterCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--promoter-accent-thickness);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gold-accent),
+    transparent
+  );
+}
+
+.promoterLogo {
+  margin-bottom: clamp(24px, 3vw, 32px);
+}
+
+.promoterLogoImage {
+  display: block;
+  max-width: 220px;
+  height: auto;
+  filter: drop-shadow(0 2px 8px color-mix(in srgb, var(--ink) 12%, transparent 88%));
+}
+
+.promoterTitle {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(1.4rem, 2.6vw, 1.8rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0 0 clamp(18px, 2.5vw, 24px);
+  position: relative;
+}
+
+.promoterTitle::after {
+  content: "";
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(48px, 6vw, 60px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-accent), transparent);
+}
+
+.promoterContent {
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--text-light);
+  max-width: 60ch;
+  margin: 0 auto;
+}
+
+.promoterContent strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.promoterBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: clamp(32px, 4.5vw, 48px);
+  gap: clamp(16px, 2vw, 24px);
+}
+
+.promoterLogo1 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.promoterLogo1Image {
+  display: block;
+  max-width: 140px;
+  height: auto;
+  opacity: 0.75;
+  filter: grayscale(20%) contrast(1.1);
+  transition: opacity 0.4s ease, filter 0.4s ease;
+}
+
+@media (hover: hover) {
+  .promoterLogo1:hover .promoterLogo1Image {
+    opacity: 1;
+    filter: grayscale(0%) contrast(1);
+  }
+}
+
+.signature {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(0.9rem, 1.6vw, 1.1rem);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold-accent);
+  letter-spacing: 0.04em;
+  text-align: right;
+  line-height: 1;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .promoterSection {
+    animation: promoterFadeIn 0.4s ease-out;
+  }
+}
+
+@keyframes promoterFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .promoterCard {
+    padding: clamp(32px, 5vw, 36px) clamp(20px, 5vw, 32px);
+    border-radius: 14px;
+  }
+
+  .promoterTitle {
+    font-size: clamp(1.3rem, 3.8vw, 1.5rem);
+  }
+
+  .promoterContent {
+    font-size: clamp(0.85rem, 3.2vw, 0.95rem);
+    line-height: 1.75;
+  }
+
+  .promoterBottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: clamp(24px, 4vw, 32px);
+  }
+
+  .promoterLogo1 {
+    justify-content: center;
+  }
+
+  .promoterLogo1Image {
+    max-width: 120px;
+  }
+
+  .signature {
+    text-align: center;
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1200px) {
+  .promoterCard {
+    box-shadow:
+      0 30px 80px color-mix(in srgb, var(--ink) 6%, transparent 94%),
+      0 8px 24px color-mix(in srgb, var(--ink) 4%, transparent 96%);
+  }
+}
